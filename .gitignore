@@ -1,0 +1,11 @@
+build/
+.cache/
+
+*.sav
+*.elf
+*.gba
+
+compile_commands.json
+
+.clangd
+.clangd-format

@@ -1,0 +1,71 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run in mGBA",
+			"type": "shell",
+			"command": "mGBA ${workspaceFolder}/${workspaceFolderBasename}.gba",
+			"problemMatcher": [],
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"dependsOn": [
+				"Build GBA ROM"
+			]
+		},
+		{
+			"label": "Build GBA ROM",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"build"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				{
+					"owner": "cpp",
+					"fileLocation": [
+						"relative",
+						"${workspaceFolder}"
+					],
+					"pattern": [
+						{
+							"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+							"file": 1,
+							"line": 2,
+							"column": 3,
+							"severity": 4,
+							"message": 5
+						}
+					]
+				}
+			],
+		},
+		{
+			"label": "Clean build",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"clean"
+			],
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "Make with Bear",
+			"type": "shell",
+			"command": "bear -- make",
+			"problemMatcher": [],
+		},
+		{
+			"label": "Generate .clangd",
+			"type": "shell",
+			"command": "${workspaceFolder}/.vscode/generate_clangd.sh",
+			"problemMatcher": []
+		}
+	],
+}
