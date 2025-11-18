@@ -21,10 +21,6 @@
 			"args": [
 				"build"
 			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
 			"problemMatcher": [
 				{
 					"owner": "cpp",
@@ -43,7 +39,7 @@
 						}
 					]
 				}
-			],
+			]
 		},
 		{
 			"label": "Clean build",
@@ -56,16 +52,14 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "Make with Bear",
+			"label": "Build GBA ROM using Bear",
 			"type": "shell",
-			"command": "bear -- make",
+			"command": "bear -- make -j32",
 			"problemMatcher": [],
-		},
-		{
-			"label": "Generate .clangd",
-			"type": "shell",
-			"command": "${workspaceFolder}/.vscode/generate_clangd.sh",
-			"problemMatcher": []
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	],
 }

@@ -1,8 +1,7 @@
 {
-    "cmake.configureArgs": [
-        "-DROM_TITLE=PHG",
-        "-DGAME_CODE=PHUB",
-        "-DMAKER_CODE=42",
-        "-DROM_VERSION=0000",
-    ],
+    "cSpell.words": [
+        "butano",
+        "tonc",
+        "libtonc",
+    ]
 }
