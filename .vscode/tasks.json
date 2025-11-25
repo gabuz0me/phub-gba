@@ -60,6 +60,39 @@
 				"kind": "build",
 				"isDefault": true
 			}
-		}
+		},
+		{
+			"label": "Run in mGBA with GDB",
+			"type": "shell",
+			"command": "mGBA --gdb ${workspaceFolder}/${workspaceFolderBasename}.elf",
+			"problemMatcher": [
+				{
+					"pattern": [
+						{
+							"regexp": ".",
+							"file": 1,
+							"location": 2,
+							"message": 3
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": ".",
+						"endsPattern": ".",
+					}
+				}
+			],
+			"isBackground": true,
+			"dependsOn": [
+				// "Build GBA ROM",
+				// "Kill all mGBA"
+			],
+		},
+		{
+			"label": "Kill all mGBA",
+			"type": "shell",
+			"command": "pkill -f mGBA",
+			"problemMatcher": []
+		},
 	],
 }

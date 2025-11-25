@@ -1,26 +1,30 @@
 #include <bn_core.h>
 
 #include "common.h"
-#include "main_screen.h"
+#include "screen.h"
+
+ScreenType current_screen = ScreenType::MAIN;
 
 int main()
 {
     bn::core::init();
-    // screen_type = MAIN;
-
-    //
 
     while (true)
     {
-        switch (screen_type)
+        switch (current_screen)
         {
         case ScreenType::MAIN:
         {
-            show_main_screen();
-            break;
-        default:
+            show_screen_main();
             break;
         }
+        case ScreenType::DELACROIX:
+        {
+            show_screen_delacroix();
+            break;
+        }
+        default:
+            break;
         }
     }
 }

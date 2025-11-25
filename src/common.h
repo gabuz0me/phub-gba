@@ -1,7 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-typedef enum
+enum class ScreenType : int
 {
     MAIN,
     INTRO,
@@ -9,10 +9,10 @@ typedef enum
     PROMPT,
     OTHER_GAMES,
     LOADING,
-    FINAL
-} ScreenType;
+    DELACROIX,
+};
 
-static ScreenType screen_type(MAIN);
+extern ScreenType current_screen;
 
 // static int VERSION = 0;
 
