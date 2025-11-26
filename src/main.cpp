@@ -23,6 +23,11 @@ int main()
             show_screen_delacroix();
             break;
         }
+        case ScreenType::ANIMATION:
+        {
+            show_screen_intro();
+            break;
+        }
         default:
             break;
         }

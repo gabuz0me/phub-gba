@@ -15,6 +15,7 @@
 #include "bn_fixed_fwd.h"
 #include "bn_regular_bg_item.h"
 #include "bn_regular_bg_items_delacroix.h"
+#include "bn_regular_bg_items_ph_intro_1.h"
 #include "bn_string_view.h"
 #include "common.h"
 #include "common_fixed_8x16_sprite_font.h"
@@ -59,13 +60,14 @@ void show_screen_delacroix(void)
     bn::fixed scroll_y = scroll_y_max;
     bn::regular_bg_ptr bg = bn::regular_bg_items::delacroix.create_bg(0, scroll_y);
     bg.set_blending_enabled(true);
-    bn::blending::set_transparency_alpha(0.2);
+    bn::blending::set_transparency_alpha(0.5);
 
-    sprite_text_generator txt_test(ti::sips_font);
-    // sprite_text_generator txt_test(common::fixed_8x16_sprite_font);
+    // sprite_text_generator txt_test(ti::sips_font);
+    sprite_text_generator txt_test(common::fixed_8x16_sprite_font);
     vector<sprite_ptr, 130> txt_test_sprite;
-    constexpr bn::string_view txt("Trés le test: áéíóúüñ¡¿αβ");
-    txt_test.generate(-120, 80 - 1 * 8, txt, txt_test_sprite);
+    constexpr bn::string_view txt("Ici le défilement.");
+    txt_test.set_alignment(sprite_text_generator::alignment_type::CENTER);
+    txt_test.generate(-0, 0, txt, txt_test_sprite);
 
     bn::fixed bg_scroll_speed = 1.7;
     while (true)
@@ -82,6 +84,38 @@ void show_screen_delacroix(void)
             scroll_y = bn::min(scroll_y, scroll_y_max);
             bg.set_y(scroll_y);
         }
+        bn::core::update();
+
+        if (bn::keypad::a_pressed() || bn::keypad::start_pressed())
+            break;
+    }
+    current_screen = ScreenType::ANIMATION;
+}
+
+void show_screen_intro(void)
+{
+    constexpr int frames_per_chunk = 45;
+    constexpr int total_frames = 45;
+    constexpr int frame_interval = 2; // 30 FPS
+    int frame = 0;
+    int counter = 0;
+    bn::regular_bg_ptr bg = bn::regular_bg_items::ph_intro_1.create_bg();
+    bg.set_top_left_position(0, 0);
+
+    while (true)
+    {
+        if (++counter >= frame_interval)
+        {
+            counter = 0;
+            frame = (frame + 1) % total_frames;
+
+            int frame_in_chunk = frame % frames_per_chunk;
+
+            int x_offset = -frame_in_chunk * 240;
+
+            bg.set_top_left_position(x_offset, 0);
+        }
+
         bn::core::update();
     }
 }
