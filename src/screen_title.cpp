@@ -1,12 +1,14 @@
 #include <bn_affine_bg_ptr.h>
 #include <bn_core.h>
-
 #include <bn_hbes.h>
 #include <bn_keypad.h>
+#include <bn_sound_items.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 
 // Project
+#include "bn_optional.h"
+#include "bn_sound_handle.h"
 #include "screen.h"
 
 // Images
@@ -47,10 +49,14 @@ void show_screen_main(void)
     bn::sprite_text_generator txt_version(common::fixed_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_version_sprite;
     txt_version.set_alignment(bn::sprite_text_generator::alignment_type::RIGHT);
-    txt_version.generate(120, 80 - 1 * 8, "v0.0.0", txt_version_sprite);
+    txt_version.generate(120, 80 - 1 * 8, "v0.69", txt_version_sprite);
+
+    bn::sound_handle handle_intro = bn::sound_items::yello_oh_yeah_intro.play();
+    bn::optional<bn::sound_handle> handle_loop;
+    bool sound_loop = false;
 
     int frame_count = 0;
-    while (!(bn::keypad::a_pressed() || bn::keypad::start_pressed()))
+    while (!a_or_start_pressed())
     {
         if (++frame_count == 30)
         {
@@ -58,10 +64,19 @@ void show_screen_main(void)
             txt_start_visible = !txt_start_visible;
             toggle_start_text(txt_start, txt_start_sprite, txt_start_visible);
         }
+
+        if (!sound_loop && !handle_intro.active())
+            sound_loop = true;
+        if (sound_loop && (!handle_loop || !handle_loop->active()))
+            handle_loop = bn::sound_items::yello_oh_yeah_loop.play();
+
         bn::core::update();
     }
 
-    current_screen = ScreenType::DELACROIX;
-    txt_start_sprite.clear();
-    txt_start.generate(txt_start_pos, "Pressed \\o/", txt_start_sprite);
+    if (handle_intro.active())
+        handle_intro.stop();
+    if (handle_loop && handle_loop->active())
+        handle_loop->stop();
+
+    current_screen = ScreenType::PH_INTRO;
 }

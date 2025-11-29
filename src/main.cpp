@@ -17,7 +17,7 @@ int main()
             show_screen_main();
             break;
         }
-        case ScreenType::ANIMATION:
+        case ScreenType::PH_INTRO:
         {
             show_screen_animation();
             break;

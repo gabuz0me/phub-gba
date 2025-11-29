@@ -116,8 +116,8 @@ void show_screen_delacroix(void)
         bg.set_y(bn::clamp(bg.y() - dy * bg_speed, scroll_y_min, scroll_y_max));
         refresh_screen_text(generator, sprite_lines_list, current_top_line, camera.y());
         bn::core::update();
-        if (bn::keypad::a_pressed() || bn::keypad::start_pressed())
+        if (a_or_start_pressed())
             break;
     }
-    current_screen = ScreenType::ANIMATION;
+    current_screen = ScreenType::PH_INTRO;
 }
