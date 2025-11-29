@@ -1,15 +1,10 @@
 #include <bn_affine_bg_ptr.h>
 #include <bn_core.h>
-#include <bn_hbes.h>
-#include <bn_keypad.h>
 #include <bn_sound_items.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 
 // Project
-#include "bn_fixed_point_fwd.h"
-#include "bn_optional.h"
-#include "bn_sound_handle.h"
 #include "screen.h"
 
 // Images
@@ -45,10 +40,8 @@ void show_screen_main(void)
     bn::sprite_text_generator txt_copyleft(verdana9::normal_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_copyleft_sprite;
     txt_copyleft.generate(-120 + 3, y_bottom, "⋅   Gabuzome 2025", txt_copyleft_sprite);
-    // txt_copyleft.generate(-120, y_bottom, "Gabuzome 2025", txt_copyleft_sprite);
 
     bn::sprite_text_generator txt_start(verdana9::bold_8x16_sprite_font);
-    // bn::sprite_text_generator txt_start(common::fixed_8x16_sprite_font);
     txt_start.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
     bn::vector<bn::sprite_ptr, 32> txt_start_sprite;
     bool txt_start_visible = true;
