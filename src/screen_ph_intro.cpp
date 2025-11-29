@@ -15,6 +15,7 @@
 
 void show_screen_animation(void)
 {
+    // bn::core::update();
     bn::bg_palettes::set_transparent_color(bn::colors::black);
 
     constexpr int frames_per_chunk[3] = {45, 23, 22};
@@ -51,10 +52,10 @@ void show_screen_animation(void)
         bn::core::update();
     }
 
-    while (frame < 60 * 1) // wait 2 seconds
+    while (frame < 60 * 1) // wait a bit
     {
         ++frame;
         bn::core::update();
     }
-    current_screen = ScreenType::TITLE;
+    current_screen = ScreenType::DELACROIX;
 }

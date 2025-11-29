@@ -19,7 +19,9 @@
 #include "common_fixed_8x8_sprite_font.h"
 #include "common_variable_8x16_sprite_font.h"
 #include "common_variable_8x8_sprite_font.h"
-#include "ti_font.h"
+
+#include "verdana9_bold_8x16_sprite_font.h"
+#include "verdana9_normal_8x16_sprite_font.h"
 
 constexpr int nb_lines = 27;
 typedef bn::vector<bn::sprite_ptr, 64> SpriteLine;
@@ -104,7 +106,7 @@ void show_screen_delacroix(void)
     bn::blending::set_transparency_alpha(0.5);
 
     int current_top_line = -1;
-    bn::sprite_text_generator generator(common::variable_8x8_sprite_font);
+    bn::sprite_text_generator generator(verdana9::normal_8x16_sprite_font);
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     generator.set_camera(camera);
     SpriteLineList sprite_lines_list(nb_lines, SpriteLine());
@@ -119,5 +121,5 @@ void show_screen_delacroix(void)
         if (a_or_start_pressed())
             break;
     }
-    current_screen = ScreenType::PH_INTRO;
+    current_screen = ScreenType::TITLE;
 }

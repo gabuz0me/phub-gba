@@ -7,6 +7,7 @@
 #include <bn_sprite_text_generator.h>
 
 // Project
+#include "bn_fixed_point_fwd.h"
 #include "bn_optional.h"
 #include "bn_sound_handle.h"
 #include "screen.h"
@@ -19,7 +20,10 @@
 #include "common_fixed_8x8_sprite_font.h"
 #include "common_variable_8x16_sprite_font.h"
 #include "common_variable_8x8_sprite_font.h"
-#include "ti_font.h"
+
+#include "verdana9_bold_8x16_sprite_font.h"
+#include "verdana9_italic_8x16_sprite_font.h"
+#include "verdana9_normal_8x16_sprite_font.h"
 
 constexpr bn::fixed_point txt_start_pos(0, 16 * 2);
 
@@ -31,25 +35,29 @@ void toggle_start_text(bn::sprite_text_generator &generator, bn::vector<bn::spri
         sprites.clear();
 }
 
+constexpr int y_bottom = 80 - 4;
+
 void show_screen_main(void)
 {
     bn::core::update();
     bn::affine_bg_ptr bg = bn::affine_bg_items::logo.create_bg(0, 0);
 
-    bn::sprite_text_generator txt_copyleft(common::fixed_8x16_sprite_font);
+    bn::sprite_text_generator txt_copyleft(verdana9::normal_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_copyleft_sprite;
-    txt_copyleft.generate(-120, 80 - 1 * 8, "Gabuzome", txt_copyleft_sprite);
+    txt_copyleft.generate(-120 + 3, y_bottom, "⋅   Gabuzome 2025", txt_copyleft_sprite);
+    // txt_copyleft.generate(-120, y_bottom, "Gabuzome 2025", txt_copyleft_sprite);
 
-    bn::sprite_text_generator txt_start(common::fixed_8x16_sprite_font);
+    bn::sprite_text_generator txt_start(verdana9::bold_8x16_sprite_font);
+    // bn::sprite_text_generator txt_start(common::fixed_8x16_sprite_font);
     txt_start.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
     bn::vector<bn::sprite_ptr, 32> txt_start_sprite;
     bool txt_start_visible = true;
     toggle_start_text(txt_start, txt_start_sprite, txt_start_visible);
 
-    bn::sprite_text_generator txt_version(common::fixed_8x16_sprite_font);
+    bn::sprite_text_generator txt_version(verdana9::italic_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_version_sprite;
     txt_version.set_alignment(bn::sprite_text_generator::alignment_type::RIGHT);
-    txt_version.generate(120, 80 - 1 * 8, "v0.69", txt_version_sprite);
+    txt_version.generate(120 - 3, y_bottom, "v0.69", txt_version_sprite);
 
     bn::sound_handle handle_intro = bn::sound_items::yello_oh_yeah_intro.play();
     bn::optional<bn::sound_handle> handle_loop;

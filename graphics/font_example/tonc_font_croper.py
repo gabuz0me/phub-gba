@@ -61,8 +61,8 @@ def parse_image(path: Path):
             line = f"{length}, // "
             if index < 127:
                 line += f"{index} {chr(index)}"
-            else:
-                line += f"{extra_letters[index - 128]}"
+            # else:
+            #     line += f"{extra_letters[index - 128]}"
             line += "\n"
             # print(line, end="")
             output_file.write(line)
