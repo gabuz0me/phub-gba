@@ -8,6 +8,9 @@
 namespace verdana9
 {
 
+constexpr bn::utf8_character italic_8x16_sprite_font_utf8_characters[] = {
+    "À", "È", "à", "â", "ç", "è", "é", "ê", "ô", "û", "œ", "©", "⋅"}; // ⋅ is copyleft symbol
+
 constexpr int8_t italic_8x16_sprite_font_character_widths[] = {
     3, // 32
     4, // 33 !
@@ -69,7 +72,7 @@ constexpr int8_t italic_8x16_sprite_font_character_widths[] = {
     6, // 89 Y
     6, // 90 Z
     6, // 91 [
-    4, // 92 backslash
+    4, // 92
     5, // 93 ]
     7, // 94 ^
     7, // 95 _
@@ -104,9 +107,23 @@ constexpr int8_t italic_8x16_sprite_font_character_widths[] = {
     4, // 124 |
     6, // 125 }
     7, // 126 ~
+    6, // À
+    6, // È
+    5, // à
+    5, // â
+    5, // ç
+    5, // è
+    5, // é
+    5, // ê
+    5, // ô
+    6, // û
+    8, // œ
+    8, // ©
+    8, // ⋅
 };
 
-constexpr bn::span<const bn::utf8_character> italic_8x16_sprite_font_utf8_characters_span;
+constexpr bn::span<const bn::utf8_character>
+    italic_8x16_sprite_font_utf8_characters_span(italic_8x16_sprite_font_utf8_characters);
 
 constexpr auto italic_8x16_sprite_font_utf8_characters_map =
     bn::utf8_characters_map<italic_8x16_sprite_font_utf8_characters_span>();

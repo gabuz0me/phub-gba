@@ -8,6 +8,7 @@
 #include <bn_sprite_tiles_ptr.h>
 
 #include "verdana9_bold_8x16_sprite_font.h"
+#include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
 
 #include "bn_regular_bg_items_showcase.h"
@@ -119,7 +120,7 @@ void show_screen_other_games(void)
     bn::regular_bg_ptr bg = bn::regular_bg_items::showcase.create_bg(0, 0);
     bn::bg_palettes::set_transparent_color(bg.palette().colors()[0]);
 
-    bn::sprite_text_generator generator(verdana9::normal_8x16_sprite_font);
+    bn::sprite_text_generator generator(verdana9::bold_8x16_sprite_font);
     bn::array<bn::color, 16> colors;
     colors[0] = bn::colors::black;
     colors[1] = bn::colors::black;

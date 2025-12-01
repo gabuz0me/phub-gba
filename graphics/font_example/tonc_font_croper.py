@@ -55,9 +55,9 @@ def parse_image(path: Path):
 
     with open(f"{path.stem}.txt", "w") as output_file:
         for index, length in enumerate(width_list, 32):
-            if index == 127:  # backspace character
-                # print("====== 127 ======")
-                continue
+            # if index == 127:  # backspace character
+            #     # print("====== 127 ======")
+            #     continue
             line = f"{length}, // "
             if index < 127:
                 line += f"{index} {chr(index)}"

@@ -8,6 +8,9 @@
 namespace verdana9
 {
 
+constexpr bn::utf8_character bold_8x16_sprite_font_utf8_characters[] = {
+    "À", "È", "à", "â", "ç", "è", "é", "ê", "ô", "û", "œ", "©", "⋅"}; // ⋅ is copyleft symbol
+
 constexpr int8_t bold_8x16_sprite_font_character_widths[] = {
     3, // 32
     4, // 33 !
@@ -69,7 +72,7 @@ constexpr int8_t bold_8x16_sprite_font_character_widths[] = {
     7, // 89 Y
     6, // 90 Z
     5, // 91 [
-    6, // 92 backslash
+    6, // 92
     5, // 93 ]
     8, // 94 ^
     6, // 95 _
@@ -104,9 +107,23 @@ constexpr int8_t bold_8x16_sprite_font_character_widths[] = {
     5, // 124 |
     6, // 125 }
     8, // 126 ~
+    8, // À
+    6, // È
+    6, // à
+    6, // â
+    5, // ç
+    6, // è
+    6, // é
+    6, // ê
+    6, // ô
+    6, // û
+    8, // œ
+    8, // ©
+    8, // ⋅
 };
 
-constexpr bn::span<const bn::utf8_character> bold_8x16_sprite_font_utf8_characters_span;
+constexpr bn::span<const bn::utf8_character>
+    bold_8x16_sprite_font_utf8_characters_span(bold_8x16_sprite_font_utf8_characters);
 
 constexpr auto bold_8x16_sprite_font_utf8_characters_map =
     bn::utf8_characters_map<bold_8x16_sprite_font_utf8_characters_span>();
