@@ -9,7 +9,7 @@ namespace verdana9
 {
 
 constexpr bn::utf8_character normal_8x16_sprite_font_utf8_characters[] = {
-    "À", "È", "à", "â", "ç", "è", "é", "ê", "ô", "û", "œ", "¬", "…", "©", "⋅"}; // ⋅ is copyleft symbol
+    "À", "È", "à", "â", "ç", "è", "é", "ê", "ô", "û", "œ", "©", "⋅"}; // ⋅ is copyleft symbol
 
 constexpr int8_t normal_8x16_sprite_font_character_widths[] = {
     2, // 32
@@ -118,8 +118,6 @@ constexpr int8_t normal_8x16_sprite_font_character_widths[] = {
     5, // ô
     5, // û
     8, // œ
-    3, //  
-    3, //  
     8, // ©
     8, // ⋅ copyleft
 };

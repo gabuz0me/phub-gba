@@ -121,5 +121,5 @@ void show_screen_delacroix(void)
         if (a_or_start_pressed())
             break;
     }
-    current_screen = ScreenType::TITLE;
+    current_screen = ScreenType::OTHER_GAMES;
 }

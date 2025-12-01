@@ -3,6 +3,7 @@
 #include "screen.h"
 
 ScreenType current_screen = ScreenType::TITLE;
+bn::seed_random randomizer;
 
 int main()
 {
@@ -25,6 +26,11 @@ int main()
         case ScreenType::DELACROIX:
         {
             show_screen_delacroix();
+            break;
+        }
+        case ScreenType::OTHER_GAMES:
+        {
+            show_screen_other_games();
             break;
         }
         default:

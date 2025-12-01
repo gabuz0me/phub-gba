@@ -3,6 +3,7 @@
 #include <bn_sound_items.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
+#include <bn_timer.h>
 
 // Project
 #include "screen.h"
@@ -34,12 +35,15 @@ constexpr int y_bottom = 80 - 4;
 
 void show_screen_main(void)
 {
+    bn::timer timer;
+    int ticks = 0;
+
     bn::core::update();
     bn::affine_bg_ptr bg = bn::affine_bg_items::logo.create_bg(0, 0);
 
     bn::sprite_text_generator txt_copyleft(verdana9::normal_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_copyleft_sprite;
-    txt_copyleft.generate(-120 + 3, y_bottom, "⋅   Gabuzome 2025", txt_copyleft_sprite);
+    txt_copyleft.generate(-120 + 3, y_bottom, "⋅  Gabuzome 2025", txt_copyleft_sprite);
 
     bn::sprite_text_generator txt_start(verdana9::bold_8x16_sprite_font);
     txt_start.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
@@ -71,6 +75,7 @@ void show_screen_main(void)
         if (sound_loop && (!handle_loop || !handle_loop->active()))
             handle_loop = bn::sound_items::yello_oh_yeah_loop.play();
 
+        ticks += timer.elapsed_ticks_with_restart();
         bn::core::update();
     }
 
@@ -79,5 +84,6 @@ void show_screen_main(void)
     if (handle_loop && handle_loop->active())
         handle_loop->stop();
 
+    randomizer.set_seed(ticks);
     current_screen = ScreenType::PH_INTRO;
 }
