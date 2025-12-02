@@ -23,42 +23,18 @@
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
 
-constexpr int nb_lines = 27;
+constexpr const char *lorem[] = {
+#include "text_delacroix_fr_verdana9_normal_8x16_sprite_font.h"
+};
+constexpr int nb_lines = sizeof(lorem) / sizeof(lorem[0]);
+
 typedef bn::vector<bn::sprite_ptr, 64> SpriteLine;
 typedef bn::vector<SpriteLine, nb_lines> SpriteLineList;
 
-constexpr int max_line_sprite_count = 64;
+// constexpr int max_line_sprite_count = 64;
 constexpr int line_height = 14;
 constexpr int line_seen_count = 3;
 constexpr int max_camera_position = line_height * (nb_lines - line_seen_count);
-
-bn::string<max_line_sprite_count> lorem[27] = {"Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper",
-                                               "vel class aptent taciti sociosqu ad litora. Blandit quis",
-                                               "suspendisse aliquet nisi sodales consequat magna. Cras eleifend",
-                                               "turpis fames primis vulputate ornare sagittis. Sem placerat in",
-                                               "id cursus mi pretium tellus. Orci varius natoque penatibus et",
-                                               "magnis dis parturient. Finibus facilisis dapibus etiam interdum",
-                                               "tortor ligula congue. Proin libero feugiat tristique accumsan",
-                                               "maecenas potenti ultricies. Sed diam urna tempor pulvinar",
-                                               "vivamus fringilla lacus. Eros lobortis nulla molestie mattis",
-                                               "scelerisque maximus eget. Porta elementum a enim euismod quam",
-                                               "justo lectus. Curabitur facilisi cubilia curae hac habitase",
-                                               "platea dictumst. Nisl malesuada lacinia integer nunc posuere ut",
-                                               "hendrerit. Efficitur laoreet mauris pharetra vestibulum fusce",
-                                               "dictum risus. Imperdiet mollis nullam volutpat porttitor",
-                                               "ullamcorper rutrum gravida. Adipiscing elit quisque faucibus ex",
-                                               "sapien vitae pellentesque. Ad litora torquent per conubia nostra",
-                                               "inceptos himenaeos. Consequat magna ante condimentum neque at",
-                                               "luctus nibh. Ornare sagittis vehicula praesent dui felis",
-                                               "venenatis ultrices. Pretium tellus duis convallis tempus leo eu",
-                                               "aenean. Dis parturient montes nascetur ridiculus mus donec",
-                                               "rhoncus. Ligula congue sollicitudin erat viverra ac tincidunt",
-                                               "nam. Potenti ultricies habitant morbi senectus netus suscipit",
-                                               "auctor. Fringilla lacus nec metus bibendum egestas iaculis",
-                                               "massa. Maximus eget fermentum odio phasellus non purus est.",
-                                               "Justo lectus commodo augue arcu dignissim velit aliquam. Platea",
-                                               "dictumst lorem ipsum dolor sit amet consectetur. Ut hendrerit",
-                                               "semper vel class aptent taciti sociosqu. Dictum risus blandit."};
 
 void refresh_screen_text(bn::sprite_text_generator &generator, //
                          SpriteLineList &sprite_line_list,     //

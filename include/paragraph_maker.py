@@ -54,8 +54,27 @@ for line in text_lines:
     current_size = 0
     is_first_word = True
     words = line.split(" ")
-    for word in words:
+    to_skip = 0
+    for word_index in range(len(words)):
+        if to_skip > 0:
+            to_skip -= 1
+            continue
+        word = words[word_index]
         size = word_size(word)
+        next_index = word_index
+        while True:
+            next_index += 1
+            if next_index >= len(words):
+                break
+            else:
+                next_word = words[next_index]
+                if next_word in ["?", "!", ":"]:
+                    word += " " + next_word
+                    size += space_size + word_size(next_word)
+                    to_skip += 1
+                else:
+                    break
+
         added_word = word
         added_size = size
         if not is_first_word:
@@ -85,7 +104,8 @@ for line in final_text_list:
 for size, line in zip(final_size_list, final_text_list):
     print(f"({size:>3}) {line}")
 
-final_text = "\n".join(final_text_list)
-output_file = text_file.stem + "_" + header_path.with_suffix(".txt").name
+output_file = text_file.stem + "_" + header_path.with_suffix(".h").name
 with open(output_file, "w") as f:
-    _ = f.write(final_text)
+    _ = f.write(f"// Cut for a width of {max_width}\n")
+    for line in final_text_list:
+        _ = f.write(f'"{line}", //\n')
