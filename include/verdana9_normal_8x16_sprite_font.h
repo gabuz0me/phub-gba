@@ -119,7 +119,7 @@ constexpr int8_t normal_8x16_sprite_font_character_widths[] = {
     5, // û
     8, // œ
     8, // ©
-    8, // ⋅ copyleft
+    8, // ⋅
 };
 
 constexpr bn::span<const bn::utf8_character>

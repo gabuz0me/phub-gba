@@ -72,7 +72,7 @@ constexpr int8_t bold_8x16_sprite_font_character_widths[] = {
     7, // 89 Y
     6, // 90 Z
     5, // 91 [
-    6, // 92
+    6, // 92 backslash
     5, // 93 ]
     8, // 94 ^
     6, // 95 _

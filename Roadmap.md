@@ -4,13 +4,13 @@
 
 Basic title screen displaying a logo, version number and stuff.
 
-- [ ] Display Logo
+- [x] Display Logo
   - [x] Draw logo 
   - [ ] (Animate logo)
 - [ ] Display BG
   - [ ] Draw BG
   - [ ] (Animate BG)
-- [ ] Display version number and stuff
+- [x] Display version number and stuff
 - [ ] (Select toggles language?)
 
 Pressing `A` or `start` leads to next screen.
@@ -21,9 +21,9 @@ Pressing `A` or `start` leads to next screen.
 
 Basic intro animation is shown, after that it goes automatically to the next screen.
 
-- [ ] Find a way to create an animation
-- [ ] Draw animation
-- [ ] Add sound
+- [x] Find a way to create an animation
+- [x] Draw animation
+- [x] Add sound
 
 ### Age confirmation screen
 
@@ -43,16 +43,15 @@ If the "no" button is selected, it goes to the other games screen
 
 Screen saying you're too young for playing this game, proposing other games to play. These are video-related websites (YouTube, ArteTV,...)
 
-- [ ] Text explaining the problem
-- [ ] Assets
-  - [ ] Find and draw four (or more) websites or video-related platforms cartridges
-    - [ ] YouTube
-    - [ ] ArteTV
-    - [ ] ???
-    - [ ] ???
-  - [ ] Draw BG
-- [ ] Show the objects
-  - [ ] (Animate the cartridges? Like small translations/rotations)
+- [x] Assets
+  - [x] Find and draw four (or more) websites or video-related platforms cartridges
+    - [x] YouTube
+    - [x] ArteTV
+    - [x] ???
+    - [x] ???
+  - [x] Draw BG
+- [x] Show the objects
+  - [x] (Animate the cartridges? Like small translations/rotations)
 
 ### Loading screen
 
@@ -66,7 +65,7 @@ A screen displaying a website slowly loading, like if there was internet issues.
 
 A screen showing the PH version of *La Liberté guidant le peuple*, by Eugène Delacroix with the infamous text explaining why PH has been banned in the country.
 
-- [ ] Pixel art the painting for the GBA
+- [x] Pixel art the painting for the GBA
 - [ ] Find an overall look
   - Is the text controlled by the `pad` and is sliding above the painting, allowing the BG to scroll a bit vertically (more interesting?),
   - Is the painting fixed on the screen, and a textbox is shown at the bottom of the screen, pressing `A` shows the lines, three by three (less visually interesting?)

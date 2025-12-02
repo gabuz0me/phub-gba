@@ -72,7 +72,7 @@ constexpr int8_t italic_8x16_sprite_font_character_widths[] = {
     6, // 89 Y
     6, // 90 Z
     6, // 91 [
-    4, // 92
+    4, // 92 backslash
     5, // 93 ]
     7, // 94 ^
     7, // 95 _
