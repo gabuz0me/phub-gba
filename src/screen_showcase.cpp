@@ -28,22 +28,26 @@ constexpr int random_frame_min = 60 * 3;
 constexpr int random_frame_max = 60 * 5;
 
 constexpr int all_cartridge_size = 6;
-bn::optional<bn::sprite_item> all_cartridges[] = {
-    bn::sprite_items::arte,    bn::sprite_items::canal, bn::sprite_items::francetv,
-    bn::sprite_items::netflix, bn::sprite_items::ph,    bn::sprite_items::youtube,
+bn::sprite_item all_cartridges[] = {
+    bn::sprite_items::arte,     //
+    bn::sprite_items::canal,    //
+    bn::sprite_items::francetv, //
+    bn::sprite_items::netflix,  //
+    bn::sprite_items::ph,       //
+    bn::sprite_items::youtube,  //
 };
 
-bn::sprite_item get_random_sprite()
+void random_order(bn::vector<int, all_cartridge_size> &table)
 {
-    while (true)
+    table.resize(all_cartridge_size);
+    bn::vector<bool, all_cartridge_size> was_picked(all_cartridge_size, false);
+    for (int i = 0; i < all_cartridge_size; ++i)
     {
-        bn::optional<bn::sprite_item> &draw = all_cartridges[randomizer.get_int(all_cartridge_size)];
-        if (draw.has_value())
-        {
-            bn::sprite_item item = draw.value();
-            draw.reset();
-            return item;
-        }
+        int random_index = randomizer.get_int(all_cartridge_size);
+        while (was_picked[random_index])
+            random_index = (random_index + 1) % all_cartridge_size;
+        table[i] = random_index;
+        was_picked[random_index] = true;
     }
 }
 
@@ -131,11 +135,14 @@ void show_screen_other_games(void)
     generator.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
     generator.generate(0, -50, "Découvrez tous nos autres jeux !", sprites);
 
+    bn::vector<int, all_cartridge_size> random_index;
+    random_order(random_index);
+
     Cartridge cartridges[4] = {
-        Cartridge(get_random_sprite(), -x_delta, y_bot_delta),
-        Cartridge(get_random_sprite(), x_delta, y_top_delta),
-        Cartridge(get_random_sprite(), -x_delta, y_top_delta),
-        Cartridge(get_random_sprite(), x_delta, y_bot_delta),
+        Cartridge(all_cartridges[random_index[0]], -x_delta, y_bot_delta),
+        Cartridge(all_cartridges[random_index[1]], x_delta, y_top_delta),
+        Cartridge(all_cartridges[random_index[2]], -x_delta, y_top_delta),
+        Cartridge(all_cartridges[random_index[3]], x_delta, y_bot_delta),
     };
 
     bn::core::update();
