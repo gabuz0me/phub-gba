@@ -1,71 +1,72 @@
-// Cut for a width of 240
-"ACCÈS À NOTRE SITE SUSPENDU EN FRANCE : À", //
-"PARTIR DU 15 JUILLET 25", //
-"", //
-"Cher utilisateur,", //
-"", //
-"Les contestations juridiques, les décisions et les", //
-"revirements en cours mettent clairement en évidence", //
-"une chose : l'absence de direction, l'absence de solution", //
-"globale et, pour dire les choses simplement, le", //
-"dysfonctionnement législatif.", //
-"", //
-"Alors que d'importantes questions concernant la mise", //
-"en œuvre de la loi en France sont encore à l'étude, nous", //
-"maintenons que les citoyens français méritent une", //
-"réglementation qui empêchera les enfants d'accéder à", //
-"des contenus pour adultes et qui pourra être mise en", //
-"œuvre de manière efficace. Ils méritent également que", //
-"leur vie privée et leurs données personnelles soient", //
-"protégées. Encore une fois, nous pensons que l'approche", //
-"actuelle est confrontée à des défis significatifs pour", //
-"atteindre ces objectifs importants.", //
-"", //
-"Votre gouvernement propose que nous vérifiions votre", //
-"âge à chaque fois que vous visitez notre site. La dure", //
-"réalité : Cette mesure ne protège pas les mineurs, elle", //
-"met en péril la vie privée de chacun et met les enfants en", //
-"danger, car elle conduit le trafic vers des milliers de", //
-"sites qui contournent délibérément les réglementations,", //
-"ne vérifient pas l'âge des participants dans les contenus", //
-"et encouragent activement les utilisateurs à", //
-"contourner la loi. Contrairement à nous, ils ne", //
-"contrôlent pas les contenus et ne donnent pas la priorité", //
-"à la sécurité, ce qui rend tout le monde plus vulnérable,", //
-"et pas moins...", //
-"", //
-"Des vols de données se produisent quotidiennement. Le", //
-"fait de vous obliger à saisir à plusieurs reprises des", //
-"informations personnelles sensibles crée un risque de", //
-"sécurité inacceptable que nous refusons d'imposer à nos", //
-"utilisateurs. Nous refusons de compromettre votre vie", //
-"privée par des mesures qui, ironiquement, ne protègent", //
-"pas efficacement les enfants. ", //
-"", //
-"Pour aller de l'avant, les législateurs doivent comprendre", //
-"que les contenus pour adultes existent sur des", //
-"centaines de milliers de plateformes, et pas seulement", //
-"sur les 17 sites désignés dans l'arrêté ministériel, et", //
-"qu'il faut s'attaquer à ce problème au moyen d'un", //
-"dispositif d'application clair.", //
-"", //
-"Nous demandons au gouvernement français et à", //
-"l'Arcom : combien de mineurs ont été protégés au cours", //
-"des six semaines depuis l'entrée en vigueur de cette loi ?", //
-"Les citoyens méritent des données démontrant si cette", //
-"loi a réduit véritablement l'accès à des contenus", //
-"inappropriés pour l'âge.", //
-"", //
-"Pour rendre l'internet plus sûr pour tout le monde,", //
-"chaque téléphone, tablette ou ordinateur devrait", //
-"commencer par être un appareil sécurisé pour les", //
-"enfants. Seuls des adultes identifiés devraient être", //
-"autorisés à déverrouiller l'accès à des contenus", //
-"inappropriés pour l'âge.", //
-"", //
-"La technologie nécessaire à cette fin existe aujourd'hui.", //
-"Nous sommes déterminés à faire partie de cette", //
-"solution et souhaitons collaborer avec les", //
-"gouvernements, la société civile et les partenaires", //
-"technologiques pour parvenir à une solution efficace de", //
-"vérification de l'âge basée sur les appareils. ", //
+// Cut for a width of 240 (justified)
+// for font verdana9_normal_8x16_sprite_font.h
+"ACCÈS  À  NOTRE  SITE  SUSPENDU  EN FRANCE : À", // (239)
+"PARTIR DU 15 JUILLET 25", // (122)
+"", // (0)
+"Cher utilisateur,", // (71)
+"", // (0)
+"Les    contestations    juridiques,    les   décisions   et   les", // (240)
+"revirements  en  cours  mettent  clairement en évidence", // (240)
+"une  chose :  l'absence  de direction, l'absence de solution", // (240)
+"globale     et,    pour    dire    les    choses    simplement,    le", // (239)
+"dysfonctionnement législatif.", // (128)
+"", // (0)
+"Alors  que  d'importantes  questions  concernant la mise", // (239)
+"en  œuvre  de  la loi en France sont encore à l'étude, nous", // (239)
+"maintenons   que   les   citoyens   français   méritent   une", // (240)
+"réglementation  qui  empêchera  les  enfants d'accéder à", // (240)
+"des  contenus  pour  adultes  et  qui  pourra  être mise en", // (239)
+"œuvre  de manière efficace. Ils méritent également que", // (239)
+"leur   vie   privée   et   leurs   données  personnelles  soient", // (240)
+"protégées. Encore une fois, nous pensons que l'approche", // (239)
+"actuelle  est  confrontée  à  des  défis  significatifs  pour", // (240)
+"atteindre ces objectifs importants.", // (155)
+"", // (0)
+"Votre  gouvernement  propose que nous vérifiions votre", // (239)
+"âge  à  chaque  fois  que  vous  visitez  notre site. La dure", // (240)
+"réalité :  Cette  mesure  ne  protège pas les mineurs, elle", // (240)
+"met en péril la vie privée de chacun et met les enfants en", // (240)
+"danger,   car  elle  conduit  le  trafic  vers  des  milliers  de", // (239)
+"sites qui contournent délibérément les réglementations,", // (240)
+"ne vérifient pas l'âge des participants dans les contenus", // (240)
+"et      encouragent      activement      les     utilisateurs     à", // (239)
+"contourner     la    loi.    Contrairement    à    nous,    ils    ne", // (239)
+"contrôlent pas les contenus et ne donnent pas la priorité", // (240)
+"à  la  sécurité,  ce  qui rend tout le monde plus vulnérable,", // (240)
+"et pas moins...", // (63)
+"", // (0)
+"Des  vols de données se produisent quotidiennement. Le", // (239)
+"fait   de   vous   obliger  à  saisir  à  plusieurs  reprises  des", // (240)
+"informations  personnelles  sensibles  crée  un  risque  de", // (239)
+"sécurité inacceptable que nous refusons d'imposer à nos", // (239)
+"utilisateurs.  Nous refusons de compromettre votre vie", // (240)
+"privée  par  des mesures qui, ironiquement, ne protègent", // (240)
+"pas efficacement les enfants. ", // (133)
+"", // (0)
+"Pour aller de l'avant, les législateurs doivent comprendre", // (239)
+"que    les    contenus    pour    adultes    existent    sur    des", // (240)
+"centaines  de  milliers de plateformes, et pas seulement", // (239)
+"sur  les  17  sites  désignés  dans  l'arrêté  ministériel,  et", // (239)
+"qu'il   faut   s'attaquer   à   ce   problème   au   moyen   d'un", // (239)
+"dispositif d'application clair.", // (119)
+"", // (0)
+"Nous    demandons    au    gouvernement    français   et   à", // (239)
+"l'Arcom :  combien de mineurs ont été protégés au cours", // (240)
+"des six semaines depuis l'entrée en vigueur de cette loi ?", // (239)
+"Les citoyens méritent des données démontrant si cette", // (240)
+"loi    a    réduit    véritablement   l'accès   à   des   contenus", // (240)
+"inappropriés pour l'âge.", // (97)
+"", // (0)
+"Pour   rendre   l'internet   plus   sûr   pour  tout  le  monde,", // (240)
+"chaque    téléphone,    tablette    ou    ordinateur    devrait", // (240)
+"commencer    par   être   un   appareil   sécurisé   pour   les", // (239)
+"enfants.   Seuls   des  adultes  identifiés  devraient  être", // (239)
+"autorisés     à    déverrouiller    l'accès    à    des    contenus", // (240)
+"inappropriés pour l'âge.", // (97)
+"", // (0)
+"La technologie nécessaire à cette fin existe aujourd'hui.", // (239)
+"Nous    sommes   déterminés   à   faire   partie   de   cette", // (240)
+"solution        et       souhaitons       collaborer       avec       les", // (239)
+"gouvernements,   la   société   civile   et   les   partenaires", // (240)
+"technologiques  pour  parvenir à une solution efficace de", // (239)
+"vérification de l'âge basée sur les appareils. ", // (185)

@@ -1,0 +1,26 @@
+line-length = 120
+
+[lint]
+select = [
+    "E",   # pycodestyle
+    "D",   # pydocstyle
+    "DOC", # pydoclint
+    "ANN",
+    "F",   # Pyflakes
+    "I",   # isort
+]
+
+ignore = [
+    "D100", # Missing docstring in public module
+    "D105", # Missing docstring in magic method
+    "D418", # No docstrings in @overload decorated functions
+]
+
+# exclude = ["tests"]
+
+[lint.pydocstyle]
+convention = "numpy"
+
+[format]
+docstring-code-format = true
+docstring-code-line-length = 80
