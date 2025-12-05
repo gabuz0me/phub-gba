@@ -24,7 +24,7 @@
 #include "verdana9_normal_8x16_sprite_font.h"
 
 // This header defines `displayed_text` and `text_width`
-#include "text_delacroix_fr_verdana9_normal_8x16_sprite_font.h"
+#include "text/text_delacroix_fr_verdana9_normal_8x16_sprite_font.h"
 
 // Customization!
 constexpr int line_height = 12;

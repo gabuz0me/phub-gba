@@ -150,7 +150,7 @@ def wrap_text(
     with open(output_file, "w", encoding="utf-8") as f:
         _ = f.write(f"// Cut for a width of {max_width}" + (" (justified)" if justify else "") + "\n")
         _ = f.write(f"// for font {header_path.name}\n\n")
-        _ = f.write("constexpr const char *displayed_text[] =\n{")
+        _ = f.write("constexpr const char *displayed_text[] =\n{\n")
         for line, width in zip(final_text_list, final_width_list):
             _ = f.write(f'"{line}", // ({width})\n')
         _ = f.write(f"}};\nconstexpr int text_width = {max_width};\n")

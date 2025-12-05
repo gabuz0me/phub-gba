@@ -2,7 +2,7 @@
 
 #include "screen.h"
 
-ScreenType current_screen = ScreenType::TITLE;
+ScreenType current_screen = ScreenType::VERIFICATION;
 bn::seed_random randomizer;
 
 int main()
@@ -21,6 +21,11 @@ int main()
         case ScreenType::PH_INTRO:
         {
             show_screen_animation();
+            break;
+        }
+        case ScreenType::VERIFICATION:
+        {
+            show_screen_verification();
             break;
         }
         case ScreenType::DELACROIX:

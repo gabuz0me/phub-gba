@@ -20,6 +20,7 @@
 #include "bn_sprite_items_ph.h"
 #include "bn_sprite_items_youtube.h"
 
+#include "multi_sprite.h"
 #include "screen.h"
 
 constexpr int radius_min = 3;
@@ -53,29 +54,17 @@ void random_order(bn::vector<int, all_cartridge_size> &table)
 
 bn::fixed smoothstep(bn::fixed x) { return (3. - 2 * x) * x * x; }
 
-class Cartridge
+#include <bn_log.h>
+#include <bn_string.h>
+class Cartridge : MultiSprite
 {
   public:
+    Cartridge(bn::sprite_item item, bn::fixed x = 0, bn::fixed y = 0) : Cartridge(item, bn::fixed_point(x, y)) {}
     Cartridge(bn::sprite_item item, const bn::fixed_point &position)
-        : _left(item.create_sprite()), _middle(item.create_sprite()), _right(item.create_sprite()),
-          _original_pos(position)
+        : MultiSprite(item, position), _original_pos(position)
     {
-        _middle.set_tiles(item.tiles_item().create_tiles(1));
-        _right.set_tiles(item.tiles_item().create_tiles(2));
-        set_position(position);
         create_target();
     }
-
-    Cartridge(bn::sprite_item item, bn::fixed x = 0, bn::fixed y = 0) : Cartridge(item, bn::fixed_point(x, y)) {}
-
-    void set_position(const bn::fixed_point &position)
-    {
-        _left.set_position(position.x() - 32, position.y());
-        _middle.set_position(position.x(), position.y());
-        _right.set_position(position.x() + 32, position.y());
-    }
-
-    void set_position(bn::fixed x = 0, bn::fixed y = 0) { set_position(bn::fixed_point(x, y)); }
 
     void create_target()
     {
@@ -85,9 +74,6 @@ class Cartridge
         _current_tick = 0;
         _target_tick = randomizer.get_int(random_frame_min, random_frame_max);
     }
-
-    bn::fixed x() const { return _middle.x(); }
-    bn::fixed y() const { return _middle.y(); }
 
     void update()
     {
@@ -105,10 +91,6 @@ class Cartridge
     }
 
   private:
-    bn::sprite_ptr _left;
-    bn::sprite_ptr _middle;
-    bn::sprite_ptr _right;
-
     bn::fixed_point _original_pos;
     bn::fixed _current_tick = 0;
     bn::fixed _target_tick;
@@ -129,8 +111,8 @@ void show_screen_other_games(void)
     colors[0] = bn::colors::black;
     colors[1] = bn::colors::black;
     bn::span<bn::color> color_span(colors);
-    bn::sprite_palette_item chibre(color_span, bn::bpp_mode::BPP_4);
-    generator.set_palette_item(chibre);
+    bn::sprite_palette_item palette(color_span, bn::bpp_mode::BPP_4);
+    generator.set_palette_item(palette);
     bn::vector<bn::sprite_ptr, 40> sprites;
     generator.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
     generator.generate(0, -50, "Découvrez tous nos autres jeux !", sprites);
