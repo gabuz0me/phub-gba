@@ -2,7 +2,7 @@
 
 #include "screen.h"
 
-ScreenType current_screen = ScreenType::VERIFICATION;
+ScreenType current_screen = ScreenType::TITLE;
 bn::seed_random randomizer;
 
 int main()

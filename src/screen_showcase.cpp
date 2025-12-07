@@ -137,5 +137,5 @@ void show_screen_other_games(void)
         bn::core::update();
     }
 
-    current_screen = ScreenType::TITLE;
+    current_screen = ScreenType::VERIFICATION;
 }
