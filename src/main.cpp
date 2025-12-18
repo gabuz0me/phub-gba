@@ -1,8 +1,9 @@
 #include <bn_core.h>
 
 #include "screen.h"
+#include "utils.h"
 
-ScreenType current_screen = ScreenType::TITLE;
+ScreenType current_screen = ScreenType::VERIFICATION;
 bn::seed_random randomizer;
 
 int main()

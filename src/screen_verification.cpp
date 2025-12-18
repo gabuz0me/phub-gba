@@ -1,16 +1,11 @@
-#include <atomic>
+// #include <atomic>
 #include <bn_bg_palettes.h>
+#include <bn_colors.h>
 #include <bn_core.h>
-#include <bn_sprite_ptr.h>
+#include <bn_math.h>
 #include <bn_sprite_text_generator.h>
 
-#include "bn_colors.h"
-#include "bn_fixed_fwd.h"
-#include "bn_fixed_point_fwd.h"
-#include "bn_keypad.h"
-#include "bn_math.h"
-#include "bn_string_view.h"
-#include "bn_vector.h"
+#include "utils.h"
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
@@ -18,7 +13,12 @@
 #include "multi_sprite.h"
 #include "screen.h"
 
-#include "bn_sprite_items_button.h"
+#include "bn_sprite_items_button_center_side.h"
+#include "bn_sprite_items_button_circle_left.h"
+#include "bn_sprite_items_button_dither.h"
+#include "bn_sprite_items_button_progress.h"
+#include "bn_sprite_items_button_radial_swipe.h"
+
 #include "bn_sprite_items_ph_pixel_small.h"
 
 #include "text/text_verification_fr_verdana9_italic_8x16_sprite_font.h"
@@ -28,11 +28,20 @@ constexpr int nb_lines = sizeof(displayed_text) / sizeof(displayed_text[0]);
 // constexpr char top_text[] = "This is an adult website";
 constexpr char top_text[] = "Ceci est un site web destiné aux adultes!";
 
+constexpr bn::sprite_item button_sprites[] = {
+    bn::sprite_items::button_center_side,  //
+    bn::sprite_items::button_circle_left,  //
+    bn::sprite_items::button_dither,       //
+    bn::sprite_items::button_progress,     //
+    bn::sprite_items::button_radial_swipe, //
+};
+constexpr int nb_button_sprites = sizeof(button_sprites) / sizeof(button_sprites[0]);
+
 class Button
 {
   public:
-    Button(const bn::fixed_point &position, bool selected, bn::string_view txt)
-        : _sL(bn::sprite_items::button.create_sprite(0)), _sR(bn::sprite_items::button.create_sprite(1)),
+    Button(const bn::sprite_item &sprite_item, const bn::fixed_point &position, bool selected, bn::string_view txt)
+        : _sprite(sprite_item), _sL(sprite_item.create_sprite(0)), _sR(sprite_item.create_sprite(1)),
           _generator(verdana9::normal_8x16_sprite_font)
     {
         set_position(position);
@@ -57,14 +66,14 @@ class Button
         bool changed = false;
         if (_selected && !select)
         {
-            _sL = bn::sprite_items::button.create_sprite(0);
-            _sR = bn::sprite_items::button.create_sprite(1);
+            _sL = _sprite.create_sprite(0);
+            _sR = _sprite.create_sprite(1);
             changed = true;
         }
         else if (!_selected && select)
         {
-            _sL = bn::sprite_items::button.create_sprite(2);
-            _sR = bn::sprite_items::button.create_sprite(3);
+            _sL = _sprite.create_sprite(2);
+            _sR = _sprite.create_sprite(3);
             changed = true;
         }
         if (changed)
@@ -78,14 +87,15 @@ class Button
 
     void set_loading(int frame) // frame in [0-7] for loading, -1 to reset to selected only
     {
-        _sL = bn::sprite_items::button.create_sprite(2 * frame + 4);
-        _sR = bn::sprite_items::button.create_sprite(2 * frame + 5);
+        _sL = _sprite.create_sprite(2 * frame + 4);
+        _sR = _sprite.create_sprite(2 * frame + 5);
         set_position(_position);
         _sL.set_z_order(1);
         _sR.set_z_order(1);
     }
 
   private:
+    const bn::sprite_item &_sprite;
     bn::fixed_point _position;
     bn::sprite_ptr _sL;
     bn::sprite_ptr _sR;
@@ -143,8 +153,9 @@ void show_screen_verification()
     constexpr int button_y = 65;
     constexpr int button_x = 50;
 
-    Button button_Y(bn::fixed_point(-button_x, button_y), false, "+18   Entrer");
-    Button button_N(bn::fixed_point(button_x, button_y), true, "-18   Partir");
+    bn::sprite_item button_sprite = button_sprites[randomizer.get_int(nb_button_sprites)];
+    Button button_Y(button_sprite, bn::fixed_point(-button_x, button_y), false, "+18   Entrer");
+    Button button_N(button_sprite, bn::fixed_point(button_x, button_y), true, "-18   Partir");
     bn::core::update();
 
     bool button_yes_selected = false;
