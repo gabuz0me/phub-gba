@@ -22,6 +22,7 @@
 
 #include "multi_sprite.h"
 #include "screen.h"
+#include "utils.h"
 
 constexpr int radius_min = 3;
 constexpr int radius_max = 5;
@@ -37,22 +38,6 @@ bn::sprite_item all_cartridges[] = {
     bn::sprite_items::ph,       //
     bn::sprite_items::youtube,  //
 };
-
-void random_order(bn::vector<int, all_cartridge_size> &table)
-{
-    table.resize(all_cartridge_size);
-    bn::vector<bool, all_cartridge_size> was_picked(all_cartridge_size, false);
-    for (int i = 0; i < all_cartridge_size; ++i)
-    {
-        int random_index = randomizer.get_int(all_cartridge_size);
-        while (was_picked[random_index])
-            random_index = (random_index + 1) % all_cartridge_size;
-        table[i] = random_index;
-        was_picked[random_index] = true;
-    }
-}
-
-bn::fixed smoothstep(bn::fixed x) { return (3. - 2 * x) * x * x; }
 
 #include <bn_log.h>
 #include <bn_string.h>
@@ -118,7 +103,7 @@ void show_screen_other_games(void)
     generator.generate(0, -50, "Découvrez tous nos autres jeux !", sprites);
 
     bn::vector<int, all_cartridge_size> random_index;
-    random_order(random_index);
+    generate_random_order(random_index);
 
     Cartridge cartridges[4] = {
         Cartridge(all_cartridges[random_index[0]], -x_delta, y_bot_delta),

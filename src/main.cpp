@@ -28,6 +28,11 @@ int main()
             show_screen_verification();
             break;
         }
+        case ScreenType::LOADING:
+        {
+            show_screen_loading();
+            break;
+        }
         case ScreenType::DELACROIX:
         {
             show_screen_delacroix();

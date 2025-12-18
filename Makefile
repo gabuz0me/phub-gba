@@ -44,6 +44,7 @@ GRAPHICS    	:=  $(GRAPHICS) graphics/ph_intro
 GRAPHICS    	:=  $(GRAPHICS) graphics/logo
 GRAPHICS    	:=  $(GRAPHICS) graphics/cartridge
 GRAPHICS    	:=  $(GRAPHICS) graphics/verification
+GRAPHICS    	:=  $(GRAPHICS) graphics/loading
 AUDIO       	:=  audio common/audio
 AUDIOBACKEND	:=  maxmod
 AUDIOTOOL		:=  

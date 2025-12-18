@@ -7,6 +7,7 @@
 
 // Project
 #include "screen.h"
+#include "utils.h"
 
 // Images
 #include "bn_affine_bg_items_logo.h"

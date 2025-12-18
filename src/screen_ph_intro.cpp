@@ -5,6 +5,7 @@
 #include <bn_keypad.h>
 #include <bn_regular_bg_ptr.h>
 #include <bn_sound_items.h>
+
 // Project
 #include "screen.h"
 

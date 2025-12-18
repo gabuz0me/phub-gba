@@ -31,7 +31,7 @@ constexpr char top_text[] = "Ceci est un site web destiné aux adultes!";
 class Button
 {
   public:
-    Button(const bn::fixed_point &position, bool selected, bn::string_view twt)
+    Button(const bn::fixed_point &position, bool selected, bn::string_view txt)
         : _sL(bn::sprite_items::button.create_sprite(0)), _sR(bn::sprite_items::button.create_sprite(1)),
           _generator(verdana9::normal_8x16_sprite_font)
     {
@@ -40,7 +40,7 @@ class Button
         set_selected(selected);
 
         _generator.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
-        _generator.generate(position.x(), position.y() + 1, twt, _text);
+        _generator.generate(position.x(), position.y() + 1, txt, _text);
         for (bn::sprite_ptr &sprite : _text)
             sprite.set_z_order(0);
     }
