@@ -53,10 +53,10 @@ void show_screen_animation(void)
         bn::core::update();
     }
 
-    while (frame < 60 * 1) // wait a bit
+    frame = 60 + 1;
+    while (--frame) // wait a bit
     {
-        ++frame;
         bn::core::update();
     }
-    current_screen = ScreenType::DELACROIX;
+    current_screen = ScreenType::VERIFICATION;
 }

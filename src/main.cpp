@@ -3,7 +3,12 @@
 #include "screen.h"
 #include "utils.h"
 
-ScreenType current_screen = ScreenType::VERIFICATION;
+#ifdef SPLASH_SCREEN
+ScreenType current_screen = ScreenType::SPLASH;
+#else
+ScreenType current_screen = ScreenType::TITLE;
+#endif
+
 bn::seed_random randomizer;
 
 int main()
@@ -44,6 +49,13 @@ int main()
             show_screen_other_games();
             break;
         }
+#ifdef SPLASH_SCREEN
+        case ScreenType::SPLASH:
+        {
+            show_screen_splash();
+            break;
+        }
+#endif
         default:
             break;
         }

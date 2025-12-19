@@ -14,7 +14,7 @@
 #include "common_fixed_8x16_sprite_font.h"
 
 constexpr int frame_count_to_100 = 350; // Theoretical time to go to 100% loading
-constexpr int percent_to_fail = 89;     // Trigger nex screen after n %
+constexpr int percent_to_fail = 99;     // Trigger nex screen after n %
 constexpr int steps = 4;                // Flat steps in loading functions
 constexpr int INT_MAX = 100;            // Everything is in percent now
 
@@ -44,7 +44,7 @@ class LoadingBar
 
 void show_screen_loading()
 {
-    constexpr bn::fixed_point loading_bar_pos(0, 0);
+    constexpr bn::fixed_point loading_bar_pos(0, 60);
     constexpr bn::fixed_point loading_text_pos(0, loading_bar_pos.y() - 1);
 
     // BG
@@ -87,11 +87,9 @@ void show_screen_loading()
 
         bn::fixed val;
         val = bn::fixed(INT_MAX - val_x) / INT_MAX;
-        val = bn::clamp<bn::fixed>(val, 0., 1.);
         bn::bgs_mosaic::set_horizontal_stretch(val);
 
         val = bn::fixed(INT_MAX - val_y) / INT_MAX;
-        val = bn::clamp<bn::fixed>(val, 0., 1.);
         bn::bgs_mosaic::set_vertical_stretch(val);
 
         ++current_frame;

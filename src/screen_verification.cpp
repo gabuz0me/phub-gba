@@ -193,7 +193,7 @@ void show_screen_verification()
         bn::core::update();
     }
 
-    current_screen = button_yes_selected ? ScreenType::TITLE : ScreenType::OTHER_GAMES;
+    current_screen = button_yes_selected ? ScreenType::LOADING : ScreenType::OTHER_GAMES;
 }
 
 // return true if a button loaded entirely
