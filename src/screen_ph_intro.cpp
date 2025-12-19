@@ -1,5 +1,6 @@
 #include <bn_audio.h>
 #include <bn_bg_palettes.h>
+#include <bn_blending.h>
 #include <bn_colors.h>
 #include <bn_core.h>
 #include <bn_keypad.h>
@@ -16,7 +17,6 @@
 
 void show_screen_animation(void)
 {
-    // bn::core::update();
     bn::bg_palettes::set_transparent_color(bn::colors::black);
 
     constexpr int frames_per_chunk[3] = {45, 23, 22};
@@ -31,6 +31,7 @@ void show_screen_animation(void)
     int counter = 0;
     int current_chunk = 0;
     bn::regular_bg_ptr bg = bgs[0].create_bg();
+    bg.set_blending_enabled(true);
     bg.set_top_left_position(0, 0);
 
     bn::core::update();
@@ -58,5 +59,14 @@ void show_screen_animation(void)
     {
         bn::core::update();
     }
+
+    constexpr int frame_fade = 20;
+    frame = frame_fade;
+    while (--frame)
+    {
+        bn::blending::set_fade_alpha(1. - bn::fixed(frame) / frame_fade);
+        bn::core::update();
+    }
+    bn::blending::set_fade_alpha(0);
     current_screen = ScreenType::VERIFICATION;
 }

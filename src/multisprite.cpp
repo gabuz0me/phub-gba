@@ -48,4 +48,12 @@ int MultiSprite::width() const { return _item.shape_size().width() * _item.tiles
 
 int MultiSprite::height() const { return _item.shape_size().height(); }
 
+void MultiSprite::set_blending_enabled(bool blending_enabled)
+{
+    for (bn::sprite_ptr &sprite : _sprites)
+    {
+        sprite.set_blending_enabled(blending_enabled);
+    }
+}
+
 const bn::fixed_point &MultiSprite::position() const { return _position; }

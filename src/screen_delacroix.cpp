@@ -1,12 +1,12 @@
+#include <bn_bg_palettes.h>
 #include <bn_blending.h>
+#include <bn_colors.h>
 #include <bn_core.h>
 #include <bn_keypad.h>
 #include <bn_regular_bg_ptr.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 #include <bn_string.h>
-
-#include <bn_log.h>
 
 // Project
 #include "screen.h"
@@ -63,6 +63,7 @@ void show_screen_delacroix(void)
     constexpr int bg_scroll_y_min = -((256 / 2) - 80 - 26); // Scrolling delta for the bottom
     constexpr bn::fixed scroll_speed = 2.5;
 
+    bn::bg_palettes::set_transparent_color(bn::colors::black);
     bn::fixed bg_scroll_y = bg_scroll_y_max;
     bn::regular_bg_ptr bg = bn::regular_bg_items::delacroix.create_bg(0, bg_scroll_y);
     bg.set_blending_enabled(true);
@@ -89,5 +90,7 @@ void show_screen_delacroix(void)
         if (a_or_start_pressed())
             break;
     }
+
+    bn::blending::set_transparency_alpha(1);
     current_screen = ScreenType::OTHER_GAMES;
 }

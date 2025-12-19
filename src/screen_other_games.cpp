@@ -1,5 +1,6 @@
 #include <bn_bg_palette_ptr.h>
 #include <bn_bg_palettes.h>
+#include <bn_blending.h>
 #include <bn_colors.h>
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
@@ -49,6 +50,7 @@ class Cartridge : MultiSprite
         : MultiSprite(item, position), _original_pos(position)
     {
         create_target();
+        set_blending_enabled(true);
     }
 
     void create_target()
@@ -90,6 +92,7 @@ void show_screen_other_games(void)
 {
     bn::regular_bg_ptr bg = bn::regular_bg_items::showcase.create_bg(0, 0);
     bn::bg_palettes::set_transparent_color(bg.palette().colors()[0]);
+    bg.set_blending_enabled(true);
 
     bn::sprite_text_generator generator(verdana9::bold_8x16_sprite_font);
     bn::array<bn::color, 16> colors;
@@ -122,5 +125,14 @@ void show_screen_other_games(void)
         bn::core::update();
     }
 
-    current_screen = ScreenType::VERIFICATION;
+    constexpr int frame_fade = 30;
+    int f = frame_fade;
+    while (--f)
+    {
+        bn::blending::set_fade_alpha(1. - bn::fixed(f) / frame_fade);
+        bn::core::update();
+    }
+
+    bn::blending::set_fade_alpha(0);
+    current_screen = ScreenType::TITLE;
 }

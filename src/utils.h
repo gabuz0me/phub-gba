@@ -45,7 +45,7 @@ constexpr bn::color rgb_to_rgb15(int r, int g, int b)
 
 namespace bn::colors
 {
-constexpr bn::color phub(rgb_to_rgb15(247, 151, 29));
+constexpr bn::color phub(rgb_to_rgb15(247, 151, 29)); // The Holy Numbers..!
 }
 
 #endif
