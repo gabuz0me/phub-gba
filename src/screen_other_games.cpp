@@ -1,12 +1,8 @@
 #include <bn_bg_palette_ptr.h>
 #include <bn_bg_palettes.h>
-#include <bn_blending.h>
-#include <bn_colors.h>
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
-#include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
-#include <bn_sprite_tiles_ptr.h>
 
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
@@ -40,8 +36,6 @@ bn::sprite_item all_cartridges[] = {
     bn::sprite_items::youtube,  //
 };
 
-#include <bn_log.h>
-#include <bn_string.h>
 class Cartridge : MultiSprite
 {
   public:

@@ -1,14 +1,11 @@
-#include <bn_audio.h>
 #include <bn_bg_palettes.h>
-#include <bn_blending.h>
-#include <bn_colors.h>
 #include <bn_core.h>
-#include <bn_keypad.h>
 #include <bn_regular_bg_ptr.h>
 #include <bn_sound_items.h>
 
 // Project
 #include "screen.h"
+#include "utils.h"
 
 // Images
 #include "bn_regular_bg_items_ph_intro_1.h"
@@ -59,14 +56,7 @@ void show_screen_animation(void)
     {
         bn::core::update();
     }
+    fade(Fade::OUT, 20);
 
-    constexpr int frame_fade = 20;
-    frame = frame_fade;
-    while (--frame)
-    {
-        bn::blending::set_fade_alpha(1. - bn::fixed(frame) / frame_fade);
-        bn::core::update();
-    }
-    bn::blending::set_fade_alpha(0);
     current_screen = ScreenType::VERIFICATION;
 }

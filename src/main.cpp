@@ -5,15 +5,17 @@
 
 #ifdef SPLASH_SCREEN
 ScreenType current_screen = ScreenType::SPLASH;
+constexpr bn::color init_color = bn::colors::white;
 #else
 ScreenType current_screen = ScreenType::TITLE;
+constexpr bn::color init_color = bn::colors::black;
 #endif
 
 bn::seed_random randomizer;
 
 int main()
 {
-    bn::core::init();
+    bn::core::init(init_color);
 
     while (true)
     {

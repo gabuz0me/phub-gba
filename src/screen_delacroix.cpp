@@ -1,15 +1,11 @@
-#include <bn_bg_palettes.h>
-#include <bn_blending.h>
-#include <bn_colors.h>
 #include <bn_core.h>
-#include <bn_keypad.h>
 #include <bn_regular_bg_ptr.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
-#include <bn_string.h>
 
 // Project
 #include "screen.h"
+#include "utils.h"
 
 // Images
 #include "bn_regular_bg_items_delacroix.h"
@@ -57,23 +53,27 @@ void refresh_screen_text(bn::sprite_text_generator &generator, //
     }
 }
 
+constexpr int frame_fading = 30;
+
 void show_screen_delacroix(void)
 {
     constexpr int bg_scroll_y_max = +((256 / 2) - 80 - 21); // Scrolling delta for the top
     constexpr int bg_scroll_y_min = -((256 / 2) - 80 - 21); // Scrolling delta for the bottom
     constexpr bn::fixed scroll_speed = 2.5;
 
-    bn::bg_palettes::set_transparent_color(bn::colors::black);
     bn::fixed bg_scroll_y = bg_scroll_y_max;
     bn::regular_bg_ptr bg = bn::regular_bg_items::delacroix.create_bg(0, bg_scroll_y);
     bg.set_blending_enabled(true);
     int current_top_line = -1;
 
     bn::sprite_text_generator generator(verdana9::normal_8x16_sprite_font);
+    generator.set_blending_enabled(true);
     bn::camera_ptr camera = bn::camera_ptr::create(0, 0);
     generator.set_camera(camera);
     SpriteLineList sprite_lines_list(nb_lines_seen + 1, SpriteLine());
+    refresh_screen_text(generator, sprite_lines_list, current_top_line, camera.y());
 
+    // fade(Fade::IN, frame_fading);
     while (true)
     {
         bn::fixed dy = (int(bn::keypad::down_held()) - int(bn::keypad::up_held())) * scroll_speed;
@@ -89,6 +89,6 @@ void show_screen_delacroix(void)
             break;
     }
 
-    bn::blending::set_transparency_alpha(1);
+    fade(Fade::OUT, frame_fading);
     current_screen = ScreenType::OTHER_GAMES;
 }

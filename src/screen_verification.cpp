@@ -1,17 +1,14 @@
-// #include <atomic>
 #include <bn_bg_palettes.h>
-#include <bn_colors.h>
 #include <bn_core.h>
-#include <bn_math.h>
 #include <bn_sprite_text_generator.h>
 
-#include "utils.h"
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
 
 #include "multi_sprite.h"
 #include "screen.h"
+#include "utils.h"
 
 #include "bn_sprite_items_button_center_side.h"
 #include "bn_sprite_items_button_circle_left.h"
@@ -49,6 +46,7 @@ class Button
         set_selected(selected);
 
         _generator.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
+        _generator.set_blending_enabled(true);
         _generator.generate(position.x(), position.y() + 1, txt, _text);
         for (bn::sprite_ptr &sprite : _text)
             sprite.set_z_order(0);
@@ -82,6 +80,8 @@ class Button
             _selected = select;
             _sL.set_z_order(1);
             _sR.set_z_order(1);
+            _sL.set_blending_enabled(true);
+            _sR.set_blending_enabled(true);
         }
     }
 
@@ -92,6 +92,8 @@ class Button
         set_position(_position);
         _sL.set_z_order(1);
         _sR.set_z_order(1);
+        _sL.set_blending_enabled(true);
+        _sR.set_blending_enabled(true);
     }
 
   private:
@@ -110,6 +112,7 @@ class Logo : MultiSprite
     Logo(const bn::sprite_item &item, const bn::fixed_point &position)
         : MultiSprite(item, position), _original_pos(position)
     {
+        set_blending_enabled(true);
     }
     void update_pos()
     {
@@ -139,12 +142,14 @@ void show_screen_verification()
 
     // Warning text
     bn::sprite_text_generator generator_top(verdana9::bold_8x16_sprite_font);
+    generator_top.set_blending_enabled(true);
     generator_top.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
     bn::vector<bn::sprite_ptr, 64> sprites_top;
     generator_top.generate(0, -45, top_text, sprites_top);
 
     // Main text
     bn::sprite_text_generator generator_main(verdana9::italic_8x16_sprite_font);
+    generator_main.set_blending_enabled(true);
     generator_main.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
     bn::vector<bn::vector<bn::sprite_ptr, 64>, nb_lines> sprites_main(nb_lines);
     for (int i = 0; i < nb_lines; ++i)
@@ -193,6 +198,8 @@ void show_screen_verification()
         bn::core::update();
     }
 
+    int duration = button_yes_selected ? 10 : 30;
+    fade(Fade::OUT, duration);
     current_screen = button_yes_selected ? ScreenType::LOADING : ScreenType::OTHER_GAMES;
 }
 

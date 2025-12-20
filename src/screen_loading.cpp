@@ -7,7 +7,6 @@
 
 #include "random_flat_curve.h"
 #include "screen.h"
-#include "utils.h"
 
 #include "bn_sprite_items_loading.h"
 

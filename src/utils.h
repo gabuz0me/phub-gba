@@ -1,8 +1,10 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <bn_color.h>
+// #include <bn_color.h>
+#include <bn_blending.h>
 #include <bn_colors.h>
+#include <bn_optional.h>
 #include <bn_seed_random.h>
 #include <bn_sprite_item.h>
 #include <bn_vector.h>
@@ -47,5 +49,14 @@ namespace bn::colors
 {
 constexpr bn::color phub(rgb_to_rgb15(247, 151, 29)); // The Holy Numbers..!
 }
+
+enum Fade : int
+{
+    IN,
+    OUT,
+};
+
+#define NO_COLOR bn::optional<bn::blending::fade_color_type>(bn::nullopt)
+void fade(Fade fade, int frame_count, bn::optional<bn::blending::fade_color_type> color = NO_COLOR);
 
 #endif

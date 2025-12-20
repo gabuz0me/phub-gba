@@ -1,5 +1,5 @@
 #include <bn_affine_bg_ptr.h>
-#include <bn_blending.h>
+#include <bn_bg_palettes.h>
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
 #include <bn_sound_items.h>
@@ -8,9 +8,6 @@
 #include <bn_timer.h>
 
 // Project
-#include "bn_bg_palettes.h"
-#include "bn_colors.h"
-#include "bn_fixed_point_fwd.h"
 #include "screen.h"
 #include "utils.h"
 
@@ -42,31 +39,32 @@ constexpr int y_bottom = 80 - 4;
 
 void show_screen_main(void)
 {
-    // bn::core::update();
-    // BGs
     bn::bg_palettes::set_transparent_color(bn::colors::black);
     bn::affine_bg_ptr bg = bn::affine_bg_items::title_bg.create_bg(0, 0);
-    bg.set_blending_enabled(true);
-    bn::blending::set_transparency_alpha(0.25);
     bg.set_scale(0.5);
+    bg.set_blending_enabled(true);
 
     bn::regular_bg_ptr main_logo = bn::regular_bg_items::title_logo.create_bg(0, 0);
+    main_logo.set_blending_enabled(true);
 
     // Texts
     bn::sprite_text_generator txt_copyleft(verdana9::normal_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_copyleft_sprite;
     txt_copyleft.generate(-120 + 3, y_bottom, "⋅  Gabuzome 2025", txt_copyleft_sprite);
+    txt_copyleft.set_blending_enabled(true);
 
     bn::sprite_text_generator txt_start(verdana9::bold_8x16_sprite_font);
     txt_start.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
     bn::vector<bn::sprite_ptr, 32> txt_start_sprite;
     bool txt_start_visible = true;
     toggle_start_text(txt_start, txt_start_sprite, txt_start_visible);
+    txt_start.set_blending_enabled(true);
 
     bn::sprite_text_generator txt_version(verdana9::italic_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_version_sprite;
     txt_version.set_alignment(bn::sprite_text_generator::alignment_type::RIGHT);
     txt_version.generate(120 - 3, y_bottom, "v0.69", txt_version_sprite);
+    txt_version.set_blending_enabled(true);
 
     // Sound
     bn::sound_handle handle_intro = bn::sound_items::yello_oh_yeah_intro.play();
@@ -77,9 +75,21 @@ void show_screen_main(void)
     bn::timer timer;
     int ticks = 0;
     int frame_count = 0;
-    while (!a_or_start_pressed())
+
+    constexpr int frame_fade_time = 15;
+    int frame_fade_count = frame_fade_time + 1;
+    bool pressed = false;
+    while (true)
     {
         bg.set_position(bg.position() + bn::fixed_point(0.25, 0.5));
+
+        if (a_or_start_pressed() || pressed)
+        {
+            pressed = true;
+            if (!--frame_fade_count)
+                break;
+            bn::blending::set_fade_alpha(1. - bn::fixed(frame_fade_count) / frame_fade_time);
+        }
 
         if (++frame_count == 30)
         {
@@ -102,7 +112,7 @@ void show_screen_main(void)
     if (handle_loop && handle_loop->active())
         handle_loop->stop();
 
+    bn::blending::set_fade_alpha(0);
     randomizer.set_seed(ticks);
-    bn::blending::set_transparency_alpha(1);
     current_screen = ScreenType::PH_INTRO;
 }
