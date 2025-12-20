@@ -59,16 +59,14 @@ void refresh_screen_text(bn::sprite_text_generator &generator, //
 
 void show_screen_delacroix(void)
 {
-    constexpr int bg_scroll_y_max = +((256 / 2) - 80 - 27); // Scrolling delta for the top
-    constexpr int bg_scroll_y_min = -((256 / 2) - 80 - 26); // Scrolling delta for the bottom
+    constexpr int bg_scroll_y_max = +((256 / 2) - 80 - 21); // Scrolling delta for the top
+    constexpr int bg_scroll_y_min = -((256 / 2) - 80 - 21); // Scrolling delta for the bottom
     constexpr bn::fixed scroll_speed = 2.5;
 
     bn::bg_palettes::set_transparent_color(bn::colors::black);
     bn::fixed bg_scroll_y = bg_scroll_y_max;
     bn::regular_bg_ptr bg = bn::regular_bg_items::delacroix.create_bg(0, bg_scroll_y);
     bg.set_blending_enabled(true);
-    bn::blending::set_transparency_alpha(0.5);
-
     int current_top_line = -1;
 
     bn::sprite_text_generator generator(verdana9::normal_8x16_sprite_font);
