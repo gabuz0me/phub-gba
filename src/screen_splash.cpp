@@ -6,6 +6,7 @@
 #include <bn_blending.h>
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
+#include <bn_sound_items.h>
 
 #include "bn_regular_bg_items_splash_screen.h"
 
@@ -32,6 +33,8 @@ void show_screen_splash()
         bn::bgs_mosaic::set_stretch(ratio);
         bn::core::update();
     }
+
+    bn::sound_items::kazoo_tada.play(0.7);
 
     // Hold
     frame = frame_hold + 1;

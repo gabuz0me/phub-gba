@@ -1,9 +1,11 @@
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
+#include <bn_sound_items.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 
 // Project
+#include "bn_optional.h"
 #include "screen.h"
 #include "utils.h"
 
@@ -73,9 +75,16 @@ void show_screen_delacroix(void)
     SpriteLineList sprite_lines_list(nb_lines_seen + 1, SpriteLine());
     refresh_screen_text(generator, sprite_lines_list, current_top_line, camera.y());
 
-    // fade(Fade::IN, frame_fading);
+    // Sound
+    bn::optional<bn::sound_handle> handle_trololo;
+    bn::sound_handle handle_error = bn::sound_items::windows_error.play();
+    constexpr int frame_before_playing = 120;
+    int frame = 0;
     while (true)
     {
+        if (frame >= frame_before_playing && (!handle_trololo.has_value() || !handle_trololo->active()))
+            handle_trololo = bn::sound_items::trololo_deg.play(0.3);
+
         bn::fixed dy = (int(bn::keypad::down_held()) - int(bn::keypad::up_held())) * scroll_speed;
         camera.set_y(bn::clamp<bn::fixed>(camera.y() + dy, 0, max_camera_position));
 
@@ -87,8 +96,12 @@ void show_screen_delacroix(void)
         bn::core::update();
         if (a_or_start_pressed())
             break;
+        ++frame;
     }
 
     fade(Fade::OUT, frame_fading);
+    if (handle_error.active())
+        handle_error.stop();
+
     current_screen = ScreenType::OTHER_GAMES;
 }

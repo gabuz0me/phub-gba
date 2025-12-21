@@ -3,19 +3,24 @@
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
 #include <bn_sprite_text_generator.h>
+#include <sys/_intsup.h>
 
+#include "bn_blending.h"
+#include "bn_fixed_point_fwd.h"
+#include "bn_keypad.h"
+#include "bn_sprite_items_button_center_side.h"
+#include "bn_sprite_ptr.h"
+#include "bn_sprite_tiles_ptr.h"
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
 
 #include "bn_regular_bg_items_showcase.h"
 
-#include "bn_sprite_items_arte.h"
-#include "bn_sprite_items_canal.h"
-#include "bn_sprite_items_francetv.h"
-#include "bn_sprite_items_netflix.h"
-#include "bn_sprite_items_ph.h"
-#include "bn_sprite_items_youtube.h"
+#include "bn_sprite_items_button_a.h"
+#include "bn_sprite_items_button_b.h"
+#include "bn_sprite_items_exit.h"
+#include "bn_sprite_items_shuffle.h"
 
 #include "multi_sprite.h"
 #include "screen.h"
@@ -26,15 +31,10 @@ constexpr int radius_max = 5;
 constexpr int random_frame_min = 60 * 3;
 constexpr int random_frame_max = 60 * 5;
 
-constexpr int all_cartridge_size = 6;
-bn::sprite_item all_cartridges[] = {
-    bn::sprite_items::arte,     //
-    bn::sprite_items::canal,    //
-    bn::sprite_items::francetv, //
-    bn::sprite_items::netflix,  //
-    bn::sprite_items::ph,       //
-    bn::sprite_items::youtube,  //
-};
+// creates `all_cartridges` and `all_cartridge_size`
+#include "cartridges.h"
+
+typedef bn::vector<int, all_cartridge_size> int_list;
 
 class Cartridge : MultiSprite
 {
@@ -71,6 +71,13 @@ class Cartridge : MultiSprite
         _current_tick += 1;
     }
 
+    enum class Status : int
+    {
+        NORMAL,
+        FADE_OUT,
+        FADE_IN
+    };
+
   private:
     bn::fixed_point _original_pos;
     bn::fixed _current_tick = 0;
@@ -79,14 +86,71 @@ class Cartridge : MultiSprite
 };
 
 constexpr bn::fixed x_delta(50);
-constexpr bn::fixed y_bot_delta(50);
-constexpr bn::fixed y_top_delta(-10);
+constexpr bn::fixed y_text(-60);
+constexpr bn::fixed y_bot_delta(35);
+constexpr bn::fixed y_top_delta(-25);
+
+bn::vector<Cartridge, 4> cartridges;
+
+void update_cartridges(const int_list &random_index_list)
+{
+    static int count = 0;
+    cartridges.clear();
+    for (int i = 0; i < 4; ++i)
+    {
+        const int index = random_index_list[(count * 4 + i) % all_cartridge_size];
+        const bn::fixed &x = i % 2 ? -x_delta : x_delta;
+        const bn::fixed &y = i < 2 ? y_top_delta : y_bot_delta;
+        cartridges.push_back(Cartridge(all_cartridges[index], x, y));
+    }
+    count += 1;
+}
+
+constexpr bn::fixed_point button_b_pos(-120 + 8, 80 - 8);
+constexpr bn::fixed_point button_a_pos(120 - 8, 80 - 8);
+
+void update_status(Cartridge::Status &status, const int_list &random_index_list, bn::sprite_ptr &button_b)
+{
+    constexpr int frame_fade_duration = 10;
+    static int frame_fade = frame_fade_duration + 1;
+    if (bn::keypad::b_pressed() && status == Cartridge::Status::NORMAL)
+    {
+        status = Cartridge::Status::FADE_OUT;
+        button_b = bn::sprite_items::button_b.create_sprite(button_b_pos, 1);
+    }
+    else if (status == Cartridge::Status::FADE_OUT)
+    {
+        if (--frame_fade)
+        {
+            bn::blending::set_transparency_alpha(bn::fixed(frame_fade) / frame_fade_duration);
+        }
+        else
+        {
+            frame_fade = frame_fade_duration + 1;
+            update_cartridges(random_index_list);
+            status = Cartridge::Status::FADE_IN;
+        }
+    }
+    else if (status == Cartridge::Status::FADE_IN)
+    {
+        if (--frame_fade)
+        {
+            bn::blending::set_transparency_alpha(1. - bn::fixed(frame_fade) / frame_fade_duration);
+        }
+        else
+        {
+            frame_fade = frame_fade_duration + 1;
+            status = Cartridge::Status::NORMAL;
+            button_b = bn::sprite_items::button_b.create_sprite(button_b_pos, 0);
+            bn::blending::set_transparency_alpha(1);
+        }
+    }
+}
 
 void show_screen_other_games(void)
 {
     bn::regular_bg_ptr bg = bn::regular_bg_items::showcase.create_bg(0, 0);
     bn::bg_palettes::set_transparent_color(bg.palette().colors()[0]);
-    bg.set_blending_enabled(true);
 
     bn::sprite_text_generator generator(verdana9::bold_8x16_sprite_font);
     bn::array<bn::color, 16> colors;
@@ -97,36 +161,37 @@ void show_screen_other_games(void)
     generator.set_palette_item(palette);
     bn::vector<bn::sprite_ptr, 40> sprites;
     generator.set_alignment(bn::sprite_text_generator::alignment_type::CENTER);
-    generator.generate(0, -50, "Découvrez tous nos autres jeux !", sprites);
+    generator.generate(0, y_text, "Découvrez tous nos autres jeux !", sprites);
 
-    bn::vector<int, all_cartridge_size> random_index;
-    generate_random_order(random_index);
+    int_list random_index_list;
+    generate_random_order(random_index_list);
+    update_cartridges(random_index_list);
 
-    Cartridge cartridges[4] = {
-        Cartridge(all_cartridges[random_index[0]], -x_delta, y_bot_delta),
-        Cartridge(all_cartridges[random_index[1]], x_delta, y_top_delta),
-        Cartridge(all_cartridges[random_index[2]], -x_delta, y_top_delta),
-        Cartridge(all_cartridges[random_index[3]], x_delta, y_bot_delta),
-    };
+    auto button_b = bn::sprite_items::button_b.create_sprite(button_b_pos);
+    auto shuffle = bn::sprite_items::shuffle.create_sprite(button_b_pos + bn::fixed_point(16, 0));
+    auto exit = bn::sprite_items::exit.create_sprite(120 - 8 - 16, 80 - 8);
+    auto button_a = bn::sprite_items::button_a.create_sprite(120 - 8, 80 - 8);
 
-    bn::core::update();
+    auto status = Cartridge::Status::NORMAL;
     while (true)
     {
-        if (a_or_start_pressed())
+        if (a_or_start_pressed() && status == Cartridge::Status::NORMAL)
+        {
+            button_a = bn::sprite_items::button_a.create_sprite(button_a_pos, 1);
             break;
+        }
         for (auto &cartridge : cartridges)
             cartridge.update();
+        update_status(status, random_index_list, button_b);
         bn::core::update();
     }
 
-    constexpr int frame_fade = 30;
-    int f = frame_fade;
-    while (--f)
-    {
-        bn::blending::set_fade_alpha(1. - bn::fixed(f) / frame_fade);
-        bn::core::update();
-    }
-
-    bn::blending::set_fade_alpha(0);
+    button_b.set_blending_enabled(true);
+    shuffle.set_blending_enabled(true);
+    button_a.set_blending_enabled(true);
+    exit.set_blending_enabled(true);
+    bg.set_blending_enabled(true);
+    fade(Fade::OUT, 30);
+    cartridges.clear();
     current_screen = ScreenType::TITLE;
 }

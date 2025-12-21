@@ -2,9 +2,12 @@
 #include <bn_core.h>
 #include <bn_regular_bg_items_ph_main_page.h>
 #include <bn_regular_bg_ptr.h>
+#include <bn_sound_items.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 
+#include "bn_sound_handle.h"
+#include "bn_sound_item.h"
 #include "random_flat_curve.h"
 #include "screen.h"
 
@@ -72,6 +75,8 @@ void show_screen_loading()
     RandomFlatCurve<steps> curve_x(frame_count_to_100, INT_MAX);
     RandomFlatCurve<steps> curve_y(frame_count_to_100, INT_MAX);
 
+    bn::sound_handle dial_up = bn::sound_items::dial_up.play();
+
     // Main Loop
     int current_frame = 0;
     while (current_frame < frame_count_to_100)
@@ -96,6 +101,9 @@ void show_screen_loading()
         if (val_mean > percent_to_fail)
             break;
     }
+
+    if (dial_up.active())
+        dial_up.stop();
 
     randomizer.set_seed(old_seed);
     current_screen = ScreenType::DELACROIX;

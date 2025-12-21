@@ -1,5 +1,6 @@
 #include <bn_bg_palettes.h>
 #include <bn_core.h>
+#include <bn_sound_items.h>
 #include <bn_sprite_text_generator.h>
 
 #include "verdana9_bold_8x16_sprite_font.h"
@@ -177,6 +178,9 @@ void show_screen_verification()
     }
 
     // Blink selected button
+    bn::sound_item sound = button_yes_selected ? bn::sound_items::acceptation : bn::sound_items::off;
+    sound.play();
+
     Button &selected_button = button_yes_selected ? button_Y : button_N;
     bool toggled = true;
     int current_frame = 0;
