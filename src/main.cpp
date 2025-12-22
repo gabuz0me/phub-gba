@@ -7,7 +7,7 @@
 ScreenType current_screen = ScreenType::SPLASH;
 constexpr bn::color init_color = bn::colors::white;
 #else
-ScreenType current_screen = ScreenType::TITLE;
+ScreenType current_screen = ScreenType::OTHER_GAMES;
 constexpr bn::color init_color = bn::colors::black;
 #endif
 

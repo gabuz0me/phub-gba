@@ -3,6 +3,8 @@
 #include <bn_sound_items.h>
 #include <bn_sprite_text_generator.h>
 
+#include "bn_optional.h"
+#include "bn_sound_handle.h"
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
@@ -12,7 +14,7 @@
 #include "utils.h"
 
 #include "bn_sprite_items_button_center_side.h"
-#include "bn_sprite_items_button_circle_left.h"
+// #include "bn_sprite_items_button_circle_left.h"
 #include "bn_sprite_items_button_dither.h"
 #include "bn_sprite_items_button_progress.h"
 #include "bn_sprite_items_button_radial_swipe.h"
@@ -27,8 +29,8 @@ constexpr int nb_lines = sizeof(displayed_text) / sizeof(displayed_text[0]);
 constexpr char top_text[] = "Ceci est un site web destiné aux adultes!";
 
 constexpr bn::sprite_item button_sprites[] = {
-    bn::sprite_items::button_center_side,  //
-    bn::sprite_items::button_circle_left,  //
+    bn::sprite_items::button_center_side, //
+    // bn::sprite_items::button_circle_left,  //
     bn::sprite_items::button_dither,       //
     bn::sprite_items::button_progress,     //
     bn::sprite_items::button_radial_swipe, //
@@ -129,10 +131,11 @@ class Logo : MultiSprite
     bn::fixed _clock_max = 150;
 };
 
-constexpr int frame_press_trigger = 30;
+constexpr int frame_press_trigger = 80;
 
 bool update_status(bool &yes_selected, int frame_press_current);
-bool update_display(Button &b_y, Button &b_n, bool swap, bool button_yes_selected, int &frame_confirm_pressed);
+bool update_display(Button &b_y, Button &b_n, bool swap, bool button_yes_selected, int &frame_confirm_pressed,
+                    bn::optional<bn::sound_handle> &handle);
 
 void show_screen_verification()
 {
@@ -164,6 +167,8 @@ void show_screen_verification()
     Button button_N(button_sprite, bn::fixed_point(button_x, button_y), true, "-18   Partir");
     bn::core::update();
 
+    bn::optional<bn::sound_handle> riser;
+
     bool button_yes_selected = false;
     int frame_press_current = 0;
     while (true)
@@ -172,12 +177,14 @@ void show_screen_verification()
 
         bn::core::update();
         bool swap = update_status(button_yes_selected, frame_press_current);
-        bool fully_loaded = update_display(button_Y, button_N, swap, button_yes_selected, frame_press_current);
+        bool fully_loaded = update_display(button_Y, button_N, swap, button_yes_selected, frame_press_current, riser);
         if (fully_loaded)
             break;
     }
 
     // Blink selected button
+    if (riser && riser->active())
+        riser->stop();
     bn::sound_item sound = button_yes_selected ? bn::sound_items::acceptation : bn::sound_items::off;
     sound.play();
 
@@ -202,16 +209,20 @@ void show_screen_verification()
         bn::core::update();
     }
 
-    int duration = button_yes_selected ? 10 : 30;
+    int duration = button_yes_selected ? 50 : 30;
     fade(Fade::OUT, duration);
     current_screen = button_yes_selected ? ScreenType::LOADING : ScreenType::OTHER_GAMES;
 }
 
 // return true if a button loaded entirely
-bool update_display(Button &b_y, Button &b_n, bool swap, bool button_yes_selected, int &frame_press_current)
+bool update_display(Button &b_y, Button &b_n, bool swap, bool button_yes_selected, int &frame_press_current,
+                    bn::optional<bn::sound_handle> &handle)
 {
     if (swap)
     {
+        if (handle && handle->active())
+            handle->stop();
+
         if (button_yes_selected)
         {
             b_y.set_selected(true);
@@ -226,10 +237,17 @@ bool update_display(Button &b_y, Button &b_n, bool swap, bool button_yes_selecte
         return false;
     }
 
+    // So that when entering screen while pressing A or Start it doesn't start the animation
     const bool a_start_pressed = bn::keypad::a_pressed() || bn::keypad::start_pressed();
     const bool a_start_held = bn::keypad::a_held() || bn::keypad::start_held();
-    // So that when entering screen while pressing A or Start it doesn't start the animation
-    if ((frame_press_current == 0 && a_start_pressed) || (frame_press_current > 0 && a_start_held)) // load animation
+    const bool starting_animation = frame_press_current == 0 && a_start_pressed;
+    const bool continue_animation = frame_press_current > 0 && a_start_held;
+
+    if (starting_animation)
+    {
+        handle = bn::sound_items::cymbal_riser.play();
+    }
+    if (starting_animation || continue_animation) // load animation
     {
         ++frame_press_current;
         int sprite_frame = (8 * frame_press_current) / frame_press_trigger;
@@ -241,6 +259,8 @@ bool update_display(Button &b_y, Button &b_n, bool swap, bool button_yes_selecte
     {
         frame_press_current = 0;
         (button_yes_selected ? b_y : b_n).set_loading(-1);
+        if (handle && handle->active())
+            handle->stop();
     }
 
     return false;

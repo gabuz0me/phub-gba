@@ -2,15 +2,11 @@
 #include <bn_bg_palettes.h>
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
+#include <bn_sound_items.h>
 #include <bn_sprite_text_generator.h>
-#include <sys/_intsup.h>
 
-#include "bn_blending.h"
-#include "bn_fixed_point_fwd.h"
-#include "bn_keypad.h"
+#include "bn_sound_handle.h"
 #include "bn_sprite_items_button_center_side.h"
-#include "bn_sprite_ptr.h"
-#include "bn_sprite_tiles_ptr.h"
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
@@ -117,6 +113,7 @@ void update_status(Cartridge::Status &status, const int_list &random_index_list,
     {
         status = Cartridge::Status::FADE_OUT;
         button_b = bn::sprite_items::button_b.create_sprite(button_b_pos, 1);
+        bn::sound_items::woosh.play();
     }
     else if (status == Cartridge::Status::FADE_OUT)
     {
@@ -147,8 +144,11 @@ void update_status(Cartridge::Status &status, const int_list &random_index_list,
     }
 }
 
+constexpr bn::fixed volume_music(0.5);
 void show_screen_other_games(void)
 {
+    bn::sound_handle music = bn::sound_items::relaxation.play(volume_music);
+
     bn::regular_bg_ptr bg = bn::regular_bg_items::showcase.create_bg(0, 0);
     bn::bg_palettes::set_transparent_color(bg.palette().colors()[0]);
 
@@ -175,6 +175,9 @@ void show_screen_other_games(void)
     auto status = Cartridge::Status::NORMAL;
     while (true)
     {
+        if (!music.active())
+            music = bn::sound_items::relaxation.play(volume_music);
+
         if (a_or_start_pressed() && status == Cartridge::Status::NORMAL)
         {
             button_a = bn::sprite_items::button_a.create_sprite(button_a_pos, 1);
@@ -191,7 +194,7 @@ void show_screen_other_games(void)
     button_a.set_blending_enabled(true);
     exit.set_blending_enabled(true);
     bg.set_blending_enabled(true);
-    fade(Fade::OUT, 30);
+    fade(Fade::OUT, 90);
     cartridges.clear();
     current_screen = ScreenType::TITLE;
 }

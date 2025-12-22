@@ -15,8 +15,8 @@
 
 #include "common_fixed_8x16_sprite_font.h"
 
-constexpr int frame_count_to_100 = 350; // Theoretical time to go to 100% loading
-constexpr int percent_to_fail = 99;     // Trigger nex screen after n %
+constexpr int frame_count_to_100 = 550; // Theoretical time to go to 100% loading
+constexpr int percent_to_fail = 89;     // Trigger next screen after n %
 constexpr int steps = 4;                // Flat steps in loading functions
 constexpr int INT_MAX = 100;            // Everything is in percent now
 

@@ -78,7 +78,7 @@ void show_screen_delacroix(void)
     // Sound
     bn::optional<bn::sound_handle> handle_trololo;
     bn::sound_handle handle_error = bn::sound_items::windows_error.play();
-    constexpr int frame_before_playing = 120;
+    constexpr int frame_before_playing = 300;
     int frame = 0;
     while (true)
     {
@@ -102,6 +102,8 @@ void show_screen_delacroix(void)
     fade(Fade::OUT, frame_fading);
     if (handle_error.active())
         handle_error.stop();
+    if (handle_trololo && handle_trololo->active())
+        handle_trololo->stop();
 
     current_screen = ScreenType::OTHER_GAMES;
 }
