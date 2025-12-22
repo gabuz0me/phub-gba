@@ -5,12 +5,15 @@
 #include <bn_sprite_text_generator.h>
 
 // Project
+#include "bn_fixed_point_fwd.h"
 #include "bn_optional.h"
 #include "screen.h"
 #include "utils.h"
 
 // Images
 #include "bn_regular_bg_items_delacroix.h"
+#include "bn_sprite_items_button_a.h"
+#include "bn_sprite_items_exit.h"
 
 // Fonts
 #include "common_fixed_8x16_sprite_font.h"
@@ -57,6 +60,9 @@ void refresh_screen_text(bn::sprite_text_generator &generator, //
 
 constexpr int frame_fading = 30;
 
+constexpr bn::fixed_point pos_button_a(-8, 80 - 16);
+constexpr bn::fixed_point pos_exit(8, 80 - 16);
+
 void show_screen_delacroix(void)
 {
     constexpr int bg_scroll_y_max = +((256 / 2) - 80 - 21); // Scrolling delta for the top
@@ -74,6 +80,10 @@ void show_screen_delacroix(void)
     generator.set_camera(camera);
     SpriteLineList sprite_lines_list(nb_lines_seen + 1, SpriteLine());
     refresh_screen_text(generator, sprite_lines_list, current_top_line, camera.y());
+
+    // Buttons?
+    bn::optional<bn::sprite_ptr> button_a;
+    bn::optional<bn::sprite_ptr> exit;
 
     // Sound
     bn::optional<bn::sound_handle> handle_trololo;
@@ -93,12 +103,23 @@ void show_screen_delacroix(void)
 
         refresh_screen_text(generator, sprite_lines_list, current_top_line, camera.y());
 
+        if (!button_a && camera.y() > max_camera_position - line_height * 3)
+        {
+            button_a = bn::sprite_items::button_a.create_sprite(pos_button_a, 0);
+            exit = bn::sprite_items::exit.create_sprite(pos_exit);
+        }
+
         bn::core::update();
-        if (a_or_start_pressed())
+        if (button_a && a_or_start_pressed())
+        {
+            button_a = bn::sprite_items::button_a.create_sprite(pos_button_a, 1);
             break;
+        }
         ++frame;
     }
 
+    button_a->set_blending_enabled(true);
+    exit->set_blending_enabled(true);
     fade(Fade::OUT, frame_fading);
     if (handle_error.active())
         handle_error.stop();
