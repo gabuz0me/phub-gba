@@ -93,7 +93,7 @@ void show_screen_delacroix(void)
     while (true)
     {
         if (frame >= frame_before_playing && (!handle_trololo.has_value() || !handle_trololo->active()))
-            handle_trololo = bn::sound_items::trololo_deg.play(0.3);
+            handle_trololo = bn::sound_items::trololo_deg.play(0.7);
 
         bn::fixed dy = (int(bn::keypad::down_held()) - int(bn::keypad::up_held())) * scroll_speed;
         camera.set_y(bn::clamp<bn::fixed>(camera.y() + dy, 0, max_camera_position));

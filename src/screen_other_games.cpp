@@ -196,5 +196,7 @@ void show_screen_other_games(void)
     bg.set_blending_enabled(true);
     fade(Fade::OUT, 90);
     cartridges.clear();
+    if (music.active())
+        music.stop();
     current_screen = ScreenType::TITLE;
 }
