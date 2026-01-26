@@ -5,7 +5,7 @@ from subprocess import check_output, run
 
 here = Path(__file__)
 json = '{"type":"sprite","height":64,"width":32}'
-aseprite = "/home/adri2/Applications/Aseprite_1.3.16.1-x64_694690fc7736a2445d12cc28aec3fead.AppImage"
+aseprite = "aseprite"  # Put full executable path here if needed
 
 cartridge_path = here / "../cartridge.aseprite"
 command_list = f"{aseprite} -b --all-layers --list-layer-hierarchy {cartridge_path}"
@@ -41,5 +41,7 @@ with open(here.parent / "../../../include/cartridges.h", "w") as f:
     for layer in layers[1:]:
         _ = f.write(f"bn::sprite_items::{layer.lower()}, //\n")
     _ = f.write("};\n")
-    _ = f.write("constexpr int all_cartridge_size = sizeof(all_cartridges) / sizeof(all_cartridges[0]);\n")
+    _ = f.write(
+        "constexpr int all_cartridge_size = sizeof(all_cartridges) / sizeof(all_cartridges[0]);\n"
+    )
 print("Done!")

@@ -1,12 +1,12 @@
 #include <bn_core.h>
+#include <bn_fixed_point_fwd.h>
+#include <bn_optional.h>
 #include <bn_regular_bg_ptr.h>
 #include <bn_sound_items.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 
 // Project
-#include "bn_fixed_point_fwd.h"
-#include "bn_optional.h"
 #include "screen.h"
 #include "utils.h"
 

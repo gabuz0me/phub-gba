@@ -2,12 +2,12 @@
 #include <bn_core.h>
 #include <bn_regular_bg_items_ph_main_page.h>
 #include <bn_regular_bg_ptr.h>
+#include <bn_sound_handle.h>
+#include <bn_sound_item.h>
 #include <bn_sound_items.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_text_generator.h>
 
-#include "bn_sound_handle.h"
-#include "bn_sound_item.h"
 #include "random_flat_curve.h"
 #include "screen.h"
 

@@ -1,10 +1,10 @@
 #include <bn_bg_palettes.h>
 #include <bn_core.h>
+#include <bn_optional.h>
+#include <bn_sound_handle.h>
 #include <bn_sound_items.h>
 #include <bn_sprite_text_generator.h>
 
-#include "bn_optional.h"
-#include "bn_sound_handle.h"
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
@@ -13,8 +13,8 @@
 #include "screen.h"
 #include "utils.h"
 
-#include "bn_sprite_items_button_center_side.h"
 // #include "bn_sprite_items_button_circle_left.h"
+#include "bn_sprite_items_button_center_side.h"
 #include "bn_sprite_items_button_dither.h"
 #include "bn_sprite_items_button_progress.h"
 #include "bn_sprite_items_button_radial_swipe.h"
@@ -29,8 +29,8 @@ constexpr int nb_lines = sizeof(displayed_text) / sizeof(displayed_text[0]);
 constexpr char top_text[] = "Ceci est un site web destiné aux adultes!";
 
 constexpr bn::sprite_item button_sprites[] = {
-    bn::sprite_items::button_center_side, //
     // bn::sprite_items::button_circle_left,  //
+    bn::sprite_items::button_center_side,  //
     bn::sprite_items::button_dither,       //
     bn::sprite_items::button_progress,     //
     bn::sprite_items::button_radial_swipe, //

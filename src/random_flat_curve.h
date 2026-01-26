@@ -20,13 +20,6 @@ template <int steps> class RandomFlatCurve
         generate_random_values<steps>(_y_list, max_output);
         bn::sort(_x_list.begin(), _x_list.end());
         bn::sort(_y_list.begin(), _y_list.end());
-        // _x_list = bn::vector<T, 2 * steps + 2>();
-        // _x_list.push_back(0.);
-        // _x_list.push_back(max_input);
-
-        // _y_list = bn::vector<T, steps + 2>();
-        // _y_list.push_back(0.);
-        // _y_list.push_back(max_output);
     }
 
     T operator()(T t)
@@ -53,18 +46,6 @@ template <int steps> class RandomFlatCurve
 
         int y_index = _last_kf / 2;
         return map(t, _x_list[_last_kf], _x_list[_last_kf + 1], _y_list[y_index], _y_list[y_index + 1]);
-    }
-
-    void debug() const
-    {
-        bn::log(bn::to_string<32>("DEBUG"));
-        bn::log(bn::to_string<32>("X"));
-        for (T val : _x_list)
-            bn::log(bn::to_string<32>(val));
-        bn::log(bn::to_string<32>("Y"));
-        for (T val : _y_list)
-            bn::log(bn::to_string<32>(val));
-        bn::log(bn::to_string<32>("====="));
     }
 
   private:

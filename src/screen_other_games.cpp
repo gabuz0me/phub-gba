@@ -2,11 +2,11 @@
 #include <bn_bg_palettes.h>
 #include <bn_core.h>
 #include <bn_regular_bg_ptr.h>
+#include <bn_sound_handle.h>
 #include <bn_sound_items.h>
+#include <bn_sprite_items_button_center_side.h>
 #include <bn_sprite_text_generator.h>
 
-#include "bn_sound_handle.h"
-#include "bn_sprite_items_button_center_side.h"
 #include "verdana9_bold_8x16_sprite_font.h"
 #include "verdana9_italic_8x16_sprite_font.h"
 #include "verdana9_normal_8x16_sprite_font.h"
@@ -183,7 +183,7 @@ void show_screen_other_games(void)
             button_a = bn::sprite_items::button_a.create_sprite(button_a_pos, 1);
             break;
         }
-        for (auto &cartridge : cartridges)
+        for (auto &cartridge : cartridges) // Comment this to disable cartridge movement
             cartridge.update();
         update_status(status, random_index_list, button_b);
         bn::core::update();

@@ -3,7 +3,7 @@
 
 #include <bn_keypad.h>
 
-#define SPLASH_SCREEN // Comment / uncomment to add a splash screen before the title screen
+// #define SPLASH_SCREEN // Comment / uncomment to add a splash screen before the title screen
 
 void show_screen_main();
 void show_screen_animation();
