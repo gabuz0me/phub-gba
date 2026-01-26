@@ -32,18 +32,19 @@ When everything is done, just run `make` and voilà.
 
 In `graphics/other_games/cartridges/`, you can add more layers to the `cartridge.aseprite` file and run `cartridge_exporter.py` to automatically create the cartridges images showcased in the final screen.
 
-### What is that `unused screen_splash.cpp`?
+### What is that unused `screen_splash.cpp`?
 
-Well, I added a splash screen to the game I built for my mate with their big head on it, but I don't want it to be publicly available. So you can define `SPLASH_SCREEN` in [`screen.h`](src/screen.h) and add your own `splash_screen.bmp` in `graphics/` so that it's used when starting the game.
+Well, I added a splash screen to the game I built for my mate with their big head on it, but I don't want it to be publicly available. So you can define `SPLASH_SCREEN` in [`screen.h`](src/screen.h#L6) and add your own `splash_screen.bmp` in `graphics/` so that it's used when starting the game.
 
 ## Credits
 
 This work is a parody. No copyright infringement intended. The logos and trademarks parodied here belong to the beneficiaries.
 
-- PHub iconic intro video and sound was ripped on [YouTube](https://www.youtube.com/watch?v=2MDlXYPHOo8),
+- PHub iconic intro video and sound was ripped on [YouTube](https://www.youtube.com/watch?v=2MDlXYPHOo8)
 - Images for the fake PH webpage are from [Pexels](https://www.pexels.com/)
 - Sounds effects are from [Pixabay](https://pixabay.com/)
-- "Trololo song" found on [YouTube](https://www.youtube.com/watch?v=j2yCfIHFRhI)
+- "Trololo song" found on [YouTube](https://www.youtube.com/watch?v=j2yCfIHFRhI), © Eduard Khil
+- [Oh Yeah](https://www.youtube.com/watch?v=6jJkdRaa04g), © Yello
 - Awesome button design by [Kenney](https://kenney.nl/assets/input-prompts-pixel-16)
 - All other images, especially the cartridges and button sprites were drawn by me and are under [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) license.
 
