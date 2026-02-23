@@ -9,3 +9,8 @@ compile_commands.json
 
 .clangd
 .clangd-format
+
+# Generated files using `cartridge_exporter.py`
+include/cartridges.h
+graphics/other_games/cartridges/*.json
+graphics/other_games/cartridges/*.bmp
