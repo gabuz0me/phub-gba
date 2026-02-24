@@ -50,7 +50,7 @@ void show_screen_main(void)
     // Texts
     bn::sprite_text_generator txt_copyleft(verdana9::normal_8x16_sprite_font);
     bn::vector<bn::sprite_ptr, 32> txt_copyleft_sprite;
-    txt_copyleft.generate(-120 + 3, y_bottom, "⋅  Gabuzome 2025", txt_copyleft_sprite);
+    txt_copyleft.generate(-120 + 3, y_bottom, "⋅  Gabuzome 2026", txt_copyleft_sprite);
     txt_copyleft.set_blending_enabled(true);
 
     bn::sprite_text_generator txt_start(verdana9::bold_8x16_sprite_font);
