@@ -44,7 +44,7 @@ cartridge_path = here / "cartridge.aseprite"
 command_list = f"{aseprite} -b --all-layers --list-layer-hierarchy {cartridge_path}"
 out = check_output(command_list.split()).decode()
 layers_all = {
-    layer[:-1]
+    layer[:-1]  # Remove final '/'
     for layer in out.split()
     if layer.endswith("/") and not layer.startswith("+")
 }
