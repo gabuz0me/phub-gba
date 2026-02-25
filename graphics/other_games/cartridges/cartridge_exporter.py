@@ -49,7 +49,7 @@ layers_all = {
     if layer.endswith("/") and not layer.startswith("+")
 }
 layers_to_hide = {layer for layer in layers_all if layer.startswith("_")}
-layers_to_show = layers_all - layers_to_hide
+layers_to_show = sorted(list(layers_all - layers_to_hide), key=str.casefold)
 
 # === Exporting images and creating json files ===
 nb_too_many_colors = 0
