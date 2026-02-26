@@ -1,7 +1,6 @@
 # PHUB-GBA
 
-[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
-[![CeCILL 2.10][cecill-shield]][cecill]
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa-link] [![CeCILL 2.10][cecill-shield]][cecill-link] [![Butano][butano-shield]][butano-link]
 
 ![intro](https://raw.githubusercontent.com/gabuz0me/images/refs/heads/main/phub-gba/intro.gif)
 
@@ -61,7 +60,9 @@ This work is a parody. No copyright infringement intended. The logos and tradema
 
 
 
-[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-link]: http://creativecommons.org/licenses/by-sa/4.0/
 [cc-by-sa-shield]: https://img.shields.io/badge/Image%20License-CC%20BY--SA%204.0-lightgrey.svg
-[cecill]: https://cecill.info/licences/Licence_CeCILL_V2.1-en.html
+[cecill-link]: https://cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [cecill-shield]: https://img.shields.io/badge/Code%20License-CeCILL%202.1-lightgrey.svg
+[butano-link]: https://github.com/GValiente/butano
+[butano-shield]: https://img.shields.io/badge/Made_with_Butano-grey?logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMzIwbW0iIGhlaWdodD0iNjQwbW0iIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDMyMCA2NDAiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTI4OSAxMzdjNy4xIDcuMiAxMSAxNSAxMSAyM3YzODBjMWUtNSAzMy02MyA2MC0xNDAgNjAtNzcgMWUtNSAtMTQwLTI3LTE0MC02MGw3ZS02IC0zODBjLTdlLTYgLTkuNCA1LjEtMTggMTQtMjZsLTguNy0xNWMtNi4zLTExIDQuMS0yOSAyMy00MCAxOS0xMSA0MC0xMSA0Ni0wLjI0bDE1IDI1YzYuNy0xLjEgMTQtMiAyMS0yLjd2LTUxYzAtMTEgMTMtMjAgMzAtMjAgMTctNmUtNiAzMCA5IDMwIDIwdjUxYzE4IDEuNyAzNCA0LjggNDkgOWwxMS0yMGM0LjctOC4xIDE5LTguMyAzMy0wLjUyIDE0IDcuOCAyMSAyMSAxNiAyOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4K
