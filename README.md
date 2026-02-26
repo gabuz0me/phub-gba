@@ -1,5 +1,8 @@
 # PHUB-GBA
 
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+[![CeCILL 2.10][cecill-shield]][cecill]
+
 ![intro](https://raw.githubusercontent.com/gabuz0me/images/refs/heads/main/phub-gba/intro.gif)
 
 ---
@@ -46,7 +49,7 @@ This work is a parody. No copyright infringement intended. The logos and tradema
 - "Trololo song" found on [YouTube](https://www.youtube.com/watch?v=j2yCfIHFRhI), © Eduard Khil
 - [Oh Yeah](https://www.youtube.com/watch?v=6jJkdRaa04g), © Yello
 - Awesome button design by [Kenney](https://kenney.nl/assets/input-prompts-pixel-16)
-- All other images, especially the cartridges and button sprites were drawn by me and are under [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) license.
+- All other images, especially the cartridges and button sprites were drawn by me and are under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license.
 
 ---
 
@@ -55,3 +58,10 @@ This work is a parody. No copyright infringement intended. The logos and tradema
 |                                                Other games!                                                |                                            Website loading!                                            |
 | :--------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: |
 | ![other games](https://raw.githubusercontent.com/gabuz0me/images/refs/heads/main/phub-gba/other_games.png) | ![other games](https://raw.githubusercontent.com/gabuz0me/images/refs/heads/main/phub-gba/loading.png) |
+
+
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-shield]: https://img.shields.io/badge/Image%20License-CC%20BY--SA%204.0-lightgrey.svg
+[cecill]: https://cecill.info/licences/Licence_CeCILL_V2.1-en.html
+[cecill-shield]: https://img.shields.io/badge/Code%20License-CeCILL%202.1-lightgrey.svg
